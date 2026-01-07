@@ -1,0 +1,28 @@
+{
+  "name": "@bp3global/bpmnlint-plugin-bpmn-rules",
+  "version": "set-by-pipeline-on-release",
+  "description": "BP3's rules to extend Camunda's core set (see bpmnlint)",
+  "main": "index.js",
+  "keywords": [
+    "bpmnlint",
+    "bpmn",
+    "linter",
+    "plugin",
+    "validation",
+    "rules"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BP3/bpmn-rules.git"
+  },
+  "engines": {
+    "node": ">= 20"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "devDependencies": {
+    "mocha": "^11.1.0"
+  }
+}
