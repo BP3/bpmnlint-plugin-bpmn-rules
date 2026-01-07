@@ -20,6 +20,9 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": ""
+    "test": "mocha test.js"
+  },
+  "devDependencies": {
+    "mocha": "^11.1.0"
   }
 }
