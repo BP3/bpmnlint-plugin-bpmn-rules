@@ -1,9 +1,9 @@
 name: Publish Package
 
 on: 
-  push:
-    tags:
-      - '*.*.*' # semantic versioning tags like 1.0.0
+  release:
+    types:
+      - published
 
 jobs:
   publish:
