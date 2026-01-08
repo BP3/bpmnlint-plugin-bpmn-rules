@@ -1,0 +1,44 @@
+name: Publish Package
+
+on: 
+  push:
+    tags:
+      - '*.*.*' # semantic versioning tags like 1.0.0
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@bp3global'
+  
+    - name: Install dependencies
+      run: npm install
+
+    - name: Install jq
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y jq
+    
+    - name: Set package version
+      run: |
+        VERSION=${GITHUB_REF_NAME}
+
+        jq ".version = \"$VERSION\"" package.json > package.json.new
+        mv package.json.new package.json
+
+    - name: Publish to GitHub Packages
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
