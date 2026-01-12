@@ -32,7 +32,7 @@ To add the rules in this package modify your `.bpmnlintrc` as follows:
 {
   "extends": [
     "bpmnlint:recommended",
-    "plugin:@BP3/bpmn-rules/recommended"
+    "plugin:@BP3/bpmnlint-plugin-bpmn-rules/recommended"
   ]
 }
 ```
@@ -45,12 +45,12 @@ either `info`, `warn` or `error`.
 {
   "extends": [
     "bpmnlint:recommended",
-    "plugin:@BP3/bpmn-rules/recommended"
+    "plugin:@BP3/bpmnlint-plugin-bpmn-rules/recommended"
   ],
   "rules": {
     "fake-join": "off",
     "label-required": "info",
-    "@BP3/bpmn-rules/user-task-without-assignment-details": "error"
-  }
+    "@BP3/bpmnlint-plugin-bpmn-rules/user-task-without-assignment-details": "error"
+  } 
 }
 ```
