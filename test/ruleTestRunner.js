@@ -7,10 +7,7 @@ const path = require('path');
 //  * and runs the tests.
 */
 function verifyRule(testCases) {
-  const callerFile =
-    module.parent && module.parent.filename
-      ? module.parent.filename
-      : __filename;
+  const callerFile = module.parent && module.parent.filename ? module.parent.filename : __filename;
 
   const base = path.basename(callerFile);
 
@@ -34,5 +31,5 @@ function _verifyRule(ruleName, testCases) {
 }
 
 module.exports = {
-  verifyRule
+  verifyRule,
 };
