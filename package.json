@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": "mocha test.js",
+    "test": "mocha test/**/*.spec.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
