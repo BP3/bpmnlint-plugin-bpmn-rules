@@ -7,7 +7,7 @@ This package contains BP3's linting rules for Camunda BPMN.
 Install the rules on your project using npm:
 
 ```shell
-npm install @bp3global/bpmnlint-plugin-bpmn-rules
+npm install @BP3/bpmnlint-plugin-bpmn-rules
 ```
 
 ## The rules included in this package
@@ -32,7 +32,7 @@ To add the rules in this package modify your `.bpmnlintrc` as follows:
 {
   "extends": [
     "bpmnlint:recommended",
-    "plugin:@bp3global/bpmn-rules/recommended"
+    "plugin:@BP3/bpmnlint-plugin-bpmn-rules/recommended"
   ]
 }
 ```
@@ -45,12 +45,12 @@ either `info`, `warn` or `error`.
 {
   "extends": [
     "bpmnlint:recommended",
-    "plugin:@bp3global/bpmn-rules/recommended"
+    "plugin:@BP3/bpmnlint-plugin-bpmn-rules/recommended"
   ],
   "rules": {
     "fake-join": "off",
     "label-required": "info",
-    "@bp3global/bpmn-rules/user-task-without-assignment-details": "error"
-  }
+    "@BP3/bpmnlint-plugin-bpmn-rules/user-task-without-assignment-details": "error"
+  } 
 }
 ```

@@ -1,5 +1,5 @@
 {
-  "name": "@bp3global/bpmnlint-plugin-bpmn-rules",
+  "name": "@BP3/bpmnlint-plugin-bpmn-rules",
   "version": "set-by-pipeline-on-release",
   "description": "BP3's rules to extend Camunda's core set (see bpmnlint)",
   "main": "index.js",
