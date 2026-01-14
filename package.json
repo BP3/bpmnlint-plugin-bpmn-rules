@@ -1,5 +1,5 @@
 {
-  "name": "@BP3/bpmnlint-plugin-bpmn-rules",
+  "name": "@bp3/bpmnlint-plugin-bpmn-rules",
   "version": "set-by-pipeline-on-release",
   "description": "BP3's rules to extend Camunda's core set (see bpmnlint)",
   "main": "index.js",
@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BP3/bpmn-rules.git"
+    "url": "git+https://github.com/BP3/bpmnlint-plugin-bpmn-rules.git"
   },
   "engines": {
     "node": ">= 20"
