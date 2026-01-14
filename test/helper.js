@@ -1,4 +1,4 @@
-const RuleTester = require('bpmnlint/lib/testers/rule-tester');
+const ruleTester = require('bpmnlint/lib/testers/rule-tester');
 const fs = require('fs');
 const path = require('path');
 
@@ -24,12 +24,16 @@ function _verifyRule(ruleName, testCases) {
 
   if (fs.existsSync(rulePath)) {
     const rule = require(rulePath);
-    RuleTester.verify(ruleName, rule, testCases);
+    ruleTester.verify(ruleName, rule, testCases);
   } else {
     console.warn(`Skipped rule "${ruleName}": file not found at ${rulePath}`);
   }
 }
+function userTaskAttributes(id, name) {
+  return `xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="${id}" name="${name}"`;
+}
 
 module.exports = {
   verifyRule,
+  userTaskAttributes,
 };

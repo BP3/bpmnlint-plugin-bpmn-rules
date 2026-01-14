@@ -11,7 +11,7 @@
  =================================================================================*/
 
 const { createModdle } = require('bpmnlint/lib/testers/helper');
-const { verifyRule } = require('./ruleTestRunner');
+const { verifyRule, userTaskAttributes } = require('./helper');
 
 verifyRule({
   valid: [
@@ -19,7 +19,7 @@ verifyRule({
       name: 'UserTask with a valid external form',
       moddleElement: createModdle(
         `
-<bpmn:userTask xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Activity_1mkqbux" name="external form">
+<bpmn:userTask ${userTaskAttributes('Activity_1mkqbux','external form')}>
   <bpmn:extensionElements>
     <zeebe:userTask />
     <zeebe:formDefinition externalReference="" />
@@ -33,7 +33,7 @@ verifyRule({
       name: 'UserTask with a Camunda form',
       moddleElement: createModdle(
         `
-<bpmn:userTask xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Activity_0b74psj" name="Do Something">
+<bpmn:userTask ${userTaskAttributes('Activity_0b74psj','Do Something')}>
   <bpmn:extensionElements>
     <zeebe:userTask />
     <zeebe:assignmentDefinition assignee="SampleUser" />
@@ -49,7 +49,7 @@ verifyRule({
       name: 'UserTask with a job worker external form',
       moddleElement: createModdle(
         `
-<bpmn:userTask xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Activity_JobWorkerUserTask" name="external form">
+<bpmn:userTask ${userTaskAttributes('Activity_JobWorkerUserTask','external form')}>
   <bpmn:extensionElements>
     <zeebe:formDefinition externalReference="" />
   </bpmn:extensionElements>
