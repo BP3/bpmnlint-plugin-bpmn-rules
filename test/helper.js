@@ -37,12 +37,17 @@ function generateFragment(xmlString) {
     </bpmn:definitions>
     `;
 }
-function userTaskAttributes(id, name) {
-  return `xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="${id}" name="${name}"`;
+
+function generateUserTaskFragment(xmlString, id, name) {
+  return `
+    <bpmn:userTask xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="${id}" name="${name}">
+      ${xmlString}
+    </bpmn:userTask>
+    `;
 }
 
 module.exports = {
   verifyRule,
   generateFragment,
-  userTaskAttributes,
+  generateUserTaskFragment,
 };

@@ -11,35 +11,39 @@
  =================================================================================*/
 
 const { createModdle } = require('bpmnlint/lib/testers/helper');
-const { verifyRule, userTaskAttributes } = require('./helper');
+const { verifyRule, generateUserTaskFragment } = require('./helper');
 
 verifyRule({
   valid: [
     {
       name: 'UserTask with a valid external form',
       moddleElement: createModdle(
-        `
-<bpmn:userTask ${userTaskAttributes('Activity_1mkqbux','external form')}>
-  <bpmn:extensionElements>
-    <zeebe:userTask />
-    <zeebe:formDefinition externalReference="" />
-  </bpmn:extensionElements>
-</bpmn:userTask>
-        `,
+        generateUserTaskFragment(
+          `
+<bpmn:extensionElements>
+  <zeebe:userTask />
+  <zeebe:formDefinition externalReference="" />
+</bpmn:extensionElements>
+          `,
+          'Activity_1mkqbux',
+          'external form'
+        ),
         'bpmn:UserTask'
       ),
     },
     {
       name: 'UserTask with a Camunda form',
       moddleElement: createModdle(
-        `
-<bpmn:userTask ${userTaskAttributes('Activity_0b74psj','Do Something')}>
-  <bpmn:extensionElements>
-    <zeebe:userTask />
-    <zeebe:assignmentDefinition assignee="SampleUser" />
-  </bpmn:extensionElements>
-</bpmn:userTask>
-        `,
+        generateUserTaskFragment(
+          `
+<bpmn:extensionElements>
+  <zeebe:userTask />
+  <zeebe:assignmentDefinition assignee="SampleUser" />
+</bpmn:extensionElements>
+          `,
+          'Activity_0b74psj',
+          'Do Something'
+        ),
         'bpmn:UserTask'
       ),
     },
@@ -48,13 +52,15 @@ verifyRule({
     {
       name: 'UserTask with a job worker external form',
       moddleElement: createModdle(
-        `
-<bpmn:userTask ${userTaskAttributes('Activity_JobWorkerUserTask','external form')}>
-  <bpmn:extensionElements>
-    <zeebe:formDefinition externalReference="" />
-  </bpmn:extensionElements>
-</bpmn:userTask>
+        generateUserTaskFragment(
+          `
+<bpmn:extensionElements>
+  <zeebe:formDefinition externalReference="" />
+</bpmn:extensionElements>
         `,
+        'Activity_JobWorkerUserTask',
+        'external form'
+        ),
         'bpmn:UserTask'
       ),
       report: {
