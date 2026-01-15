@@ -20,13 +20,14 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": "mocha test/**/*.spec.js",
+    "test": "mocha test/check-coverage.spec.js test/**/*.spec.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "bpmnlint": "^11.7.2",
     "@eslint/js": "^9.39.2",
+    "bpmnlint": "^11.7.2",
+    "chalk": "^5.6.2",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
