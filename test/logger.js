@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-const chalk = require('chalk');
+const chalk = require('chalk').default;
 
 const logger = {
   log: (...args) => {
@@ -9,15 +9,16 @@ const logger = {
     }
   },
   info: (...args) => {
-    console.log(chalk.blueBright.bold('INFO:'), ...args);
+    console.log(chalk.bold(chalk.blueBright('INFO:')), ...args);
   },
   warn: (...args) => {
-    console.warn(chalk.yellowBright.bold('WARN:'), ...args);
+    console.warn(chalk.bold(chalk.yellowBright('WARN:')), ...args);
   },
   error: (...args) => {
-    console.error(chalk.redBright.bold('ERROR:'), ...args);
+    console.error(chalk.bold(chalk.redBright('ERROR:')), ...args);
   },
 };
+
 
 module.exports = {
   logger,
