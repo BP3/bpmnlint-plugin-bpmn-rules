@@ -13,7 +13,7 @@
 const { createModdle } = require('bpmnlint/lib/testers/helper');
 const { verifyRule, generateUserTaskFragment } = require('./helper');
 
-verifyRule({
+verifyRule(__filename, {
   valid: [
     {
       name: 'UserTask with a valid external form',
@@ -58,8 +58,8 @@ verifyRule({
   <zeebe:formDefinition externalReference="" />
 </bpmn:extensionElements>
         `,
-        'Activity_JobWorkerUserTask',
-        'external form'
+          'Activity_JobWorkerUserTask',
+          'external form'
         ),
         'bpmn:UserTask'
       ),
