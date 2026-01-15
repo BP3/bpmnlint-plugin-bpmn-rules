@@ -2,7 +2,7 @@
  =
  = Licensed Materials - Property of BP3 Global
  =
- =  bpmn-rules
+ =  bpmnlint-plugin-bpmn-rules
  =
  = Copyright © BP3 Global Inc. 2026. All Rights Reserved.
  = This software is subject to copyright protection under
