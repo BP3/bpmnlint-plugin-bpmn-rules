@@ -13,7 +13,7 @@
 const { createModdle } = require('bpmnlint/lib/testers/helper');
 const { verifyRule, generateFragment } = require('./helper');
 
-verifyRule({
+verifyRule(__filename, {
   valid: [
     {
       name: 'Process with valid signal name',
