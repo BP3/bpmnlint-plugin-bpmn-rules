@@ -1,6 +1,7 @@
 const RuleTester = require('bpmnlint/lib/testers/rule-tester');
 const fs = require('fs');
 const path = require('path');
+const { logger } = require('./logger');
 
 /**
 //  * Helper function that automatically extracts rule name from the calling test file
@@ -26,7 +27,7 @@ function _verifyRule(ruleName, testCases) {
     const rule = require(rulePath);
     RuleTester.verify(ruleName, rule, testCases);
   } else {
-    console.warn(`Skipped rule "${ruleName}": file not found at ${rulePath}`);
+    logger.warn(`Skipped rule "${ruleName}": file not found at ${rulePath}`);
   }
 }
 
