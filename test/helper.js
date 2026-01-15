@@ -3,32 +3,27 @@ const fs = require('fs');
 const path = require('path');
 const { logger } = require('./logger');
 
-/**
-//  * Helper function that automatically extracts rule name from the calling test file
-//  * and runs the tests.
+/*
+  Helper function that automatically extracts rule name from the calling test file
+  and runs the tests.
+ 
+  @param {string} specFilePath - __filename from the spec file
+  @param {object} testCases - { valid: [], invalid: [] }
 */
-function verifyRule(testCases) {
-  const callerFile = module.parent && module.parent.filename ? module.parent.filename : __filename;
 
-  const base = path.basename(callerFile);
+function verifyRule(specFilePath, testCases) {
+  const specBaseName = path.basename(specFilePath);
+  const ruleName = specBaseName.replace(/\.spec\.js$/, '');
+  const rulePath = path.join(__dirname, '../rules', `${ruleName}.js`);
 
-  const ruleName = base.replace(/\.spec\.js$/, '');
-
-  _verifyRule(ruleName, testCases);
-}
-
-/**
- * Internal implementation: executes the rule test
- */
-function _verifyRule(ruleName, testCases) {
-  const rulePath = path.resolve(__dirname, `../rules/${ruleName}.js`);
-
-  if (fs.existsSync(rulePath)) {
-    const rule = require(rulePath);
-    RuleTester.verify(ruleName, rule, testCases);
-  } else {
-    logger.warn(`Skipped rule "${ruleName}": file not found at ${rulePath}`);
+  if (!fs.existsSync(rulePath)) {
+    logger.info(`Skipped test "${ruleName}": rule not found at ${rulePath}`);
+    return;
   }
+
+  const rule = require(rulePath);
+
+  RuleTester.verify(ruleName, rule, testCases);
 }
 
 function generateFragment(xmlString) {
