@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { logger } = require('./logger');
 
 /**
  * Checks which rules don't have corresponding test files and logs them
@@ -9,7 +10,7 @@ function checkRulesWithoutTests() {
   const testsDir = path.resolve(__dirname, '.');
 
   if (!fs.existsSync(rulesDir)) {
-    console.warn(`Rules directory not found: ${rulesDir}`);
+    logger.warn(`Rules directory not found: ${rulesDir}`);
     return [];
   }
 
@@ -29,10 +30,8 @@ function checkRulesWithoutTests() {
   const rulesWithoutTests = ruleFiles.filter((rule) => !testFiles.includes(rule));
 
   if (rulesWithoutTests.length > 0) {
-    console.log('\n Rules without tests:');
-    rulesWithoutTests.forEach((rule) => {
-      console.log(`   - ${rule}`);
-    });
+    const message = 'Rules without tests:\n' + rulesWithoutTests.map((rule) => `- ${rule}`).join('\n');
+    logger.warn(message);
   }
 
   return rulesWithoutTests;
