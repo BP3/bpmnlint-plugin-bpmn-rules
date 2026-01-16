@@ -24,7 +24,6 @@ module.exports = function() {
         return;
       }
 
-      //NOTE: unsure whether to report also if there are no extensionElements
       let isJobWorker = true;
 
       if (node.extensionElements != null && (node.extensionElements.values || []).length > 0) {
