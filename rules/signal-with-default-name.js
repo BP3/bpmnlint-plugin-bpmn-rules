@@ -23,10 +23,10 @@ module.exports = function() {
       if (isAny(node, ['bpmn:Signal'])) {
         let isNotSignificantName = false;
         let notSignificantNamePattern = /^Signal_\d\w{6}$/i;
-        isNotSignificantId = notSignificantNamePattern.test(node.name);
+        isNotSignificantName = notSignificantNamePattern.test(node.name);
 
         //output
-        if (isNotSignificantId) {
+        if (isNotSignificantName) {
             reporter.report(node.name, 'Signal has a default name. Please provide a significant name!');
         }
       }
