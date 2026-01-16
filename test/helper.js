@@ -33,16 +33,7 @@ function generateFragment(xmlString) {
     `;
 }
 
-function generateUserTaskFragment(xmlString, id, name) {
-  return `
-    <bpmn:userTask xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="${id}" name="${name}">
-      ${xmlString}
-    </bpmn:userTask>
-    `;
-}
-
 module.exports = {
   verifyRule,
-  generateFragment,
-  generateUserTaskFragment,
+  generateFragment
 };
