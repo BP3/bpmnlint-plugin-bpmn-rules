@@ -10,7 +10,6 @@ const { logger } = require('./logger');
   @param {string} specFilePath - __filename from the spec file
   @param {object} testCases - { valid: [], invalid: [] }
 */
-
 function verifyRule(specFilePath, testCases) {
   const specBaseName = path.basename(specFilePath);
   const ruleName = specBaseName.replace(/\.spec\.js$/, '');
@@ -36,5 +35,5 @@ function generateFragment(xmlString) {
 
 module.exports = {
   verifyRule,
-  generateFragment,
+  generateFragment
 };
