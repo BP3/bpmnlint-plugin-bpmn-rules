@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { logger } = require('./logger');
+const { logger } = require('../logger');
 
 /**
  * Checks which rules don't have corresponding test files and logs them
