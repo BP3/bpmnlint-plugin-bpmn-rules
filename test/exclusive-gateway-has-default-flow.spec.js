@@ -55,6 +55,7 @@ verifyRule(__filename, {
       name: "Process gateway without default flow",
       moddleElement: createModdle(
         generateFragment(`
+        <bpmn:process id="Process_1" isExecutable="false">
           <bpmn:exclusiveGateway id="Gateway_1u56rij" name="Payment successful?">
             <bpmn:outgoing>Flow_01d6nrp</bpmn:outgoing>
             <bpmn:outgoing>Flow_16ibx6r</bpmn:outgoing>
@@ -62,6 +63,7 @@ verifyRule(__filename, {
 
           <bpmn:sequenceFlow id="Flow_01d6nrp" sourceRef="Gateway_1u56rij" targetRef="A" />
           <bpmn:sequenceFlow id="Flow_16ibx6r" sourceRef="Gateway_1u56rij" targetRef="B" />
+        </bpmn:process>
         `)
       ),
       report: {
