@@ -16,8 +16,7 @@ const path = require('path');
 
 // Get the prefix for this plugin from the package.json if it's set
 const { name } = require('./package.json');
-//NOTE: not using the start of string ^ wildcard because it's not the case when there's a @publisherName present
-const prefix = name.replace(/bpmnlint-plugin-/, '');
+const prefix = name.trim();
 
 const rulesPath = './rules';
 
