@@ -30,7 +30,7 @@ verifyRule(__filename, {
         )
       },
       {
-        name: "Process with a gateway that has a default and a join without default",
+        name: "Testing a join scenario",
         moddleElement: createModdle(
           generateFragment(`
             <bpmn:inclusiveGateway id="Gateway_1yay0j2">
