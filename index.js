@@ -20,9 +20,9 @@ const prefix = name.trim();
 
 const rulesPath = './rules';
 
-//helper to prepare the rules path for the plugin
+// helper to prepare the rules path for the plugin
 function getRulePath(basePath, ruleName) {
-  return `${basePath != null && basePath.trim().length > 0 ? `${basePath}/` : ``}${ruleName}`;
+  return basePath?.trim() ? `${basePath}/${ruleName}` : ruleName;
 }
 
 let bpmnlintRulesConfig = {
@@ -46,7 +46,7 @@ function addRule(ruleName, severity) {
 
   var rulesets = Object.keys(severity);
   rulesets.forEach((item) => {
-    const prefixedRuleName = `${prefix != null && prefix.trim().length > 0 ? `${prefix}/` : ``}${ruleName}`;
+    const prefixedRuleName = prefix ? `${prefix}/${ruleName}` : ruleName;
     bpmnlintRulesConfig.configs[item].rules[prefixedRuleName] = severity[item];
   });
 }
