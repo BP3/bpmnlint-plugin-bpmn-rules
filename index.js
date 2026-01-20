@@ -29,8 +29,8 @@ function getRulePath(basePath, ruleName) {
 let bpmnlintRulesConfig = {
   configs: {
     all: { rules: {} },
-    'getting-started': { rules: {} },
-    advanced: { rules: {} },
+    recommend: { rules: {} },
+    strict: { rules: {} },
   },
   rules: {},
 };
@@ -52,25 +52,25 @@ function addRule(ruleName, severity) {
   });
 }
 
-addRule('activity-with-default-id', { "all": "warn", "getting-started": "warn", "advanced": "error" });
-addRule('activity-without-type', { "all": "info", "getting-started": "info", "advanced": "info" });
-addRule('artifact-with-default-id', { "all": "off", "getting-started": "off", "advanced": "off" });
-addRule('event-with-default-id', { "all": "info", "getting-started": "info", "advanced": "warn" });
-addRule('error-with-default-name', { "all": "warn", "getting-started": "warn", "advanced": "error" });
-addRule('escalation-with-default-name', { "all": "info", "getting-started": "info", "advanced": "warn" });
-addRule('exclusive-gateway-has-default-flow', { "all": "info", "getting-started": "info", "advanced": "warn" });
-addRule('gateway-with-default-id', { "all": "info", "getting-started": "info", "advanced": "warn" });
-addRule('lane-with-default-id', { "all": "info", "getting-started": "off", "advanced": "info" });
-addRule('message-flow-with-default-id', { "all": "info", "getting-started": "info", "advanced": "info" });
-addRule('message-with-default-name', { "all": "warn", "getting-started": "warn", "advanced": "error" });
-addRule('no-job-worker-user-task-implementation-type', { "all": "error", "getting-started": "error", "advanced": "error" });
-addRule('participant-with-default-id', { "all": "info", "getting-started": "off", "advanced": "info" });
-addRule('process-with-default-id', { "all": "error", "getting-started": "error", "advanced": "error" });
-addRule('process-with-default-name', { "all": "warn", "getting-started": "info", "advanced": "warn" });
-addRule('sequence-flow-with-default-id', { "all": "info", "getting-started": "off", "advanced": "info" });
-addRule('signal-with-default-name', { "all": "warn", "getting-started": "info", "advanced": "warn" });
-addRule('subprocess-with-default-id', { "all": "info", "getting-started": "info", "advanced": "warn" });
-addRule('user-task-without-assignment-details', { "all": "warn", "getting-started": "warn", "advanced": "error" });
-addRule('variable-name-with-invalid-character', { "all": "error", "getting-started": "warn", "advanced": "error" });
+addRule('activity-with-default-id', { "all": "warn", "recommend": "warn", "strict": "error" });
+addRule('activity-without-type', { "all": "info", "recommend": "info", "strict": "info" });
+addRule('artifact-with-default-id', { "all": "off", "recommend": "off", "strict": "off" });
+addRule('event-with-default-id', { "all": "info", "recommend": "info", "strict": "warn" });
+addRule('error-with-default-name', { "all": "warn", "recommend": "warn", "strict": "error" });
+addRule('escalation-with-default-name', { "all": "info", "recommend": "info", "strict": "warn" });
+addRule('exclusive-gateway-has-default-flow', { "all": "info", "recommend": "info", "strict": "warn" });
+addRule('gateway-with-default-id', { "all": "info", "recommend": "info", "strict": "warn" });
+addRule('lane-with-default-id', { "all": "info", "recommend": "off", "strict": "info" });
+addRule('message-flow-with-default-id', { "all": "info", "recommend": "info", "strict": "info" });
+addRule('message-with-default-name', { "all": "warn", "recommend": "warn", "strict": "error" });
+addRule('no-job-worker-user-task-implementation-type', { "all": "error", "recommend": "error", "strict": "error" });
+addRule('participant-with-default-id', { "all": "info", "recommend": "off", "strict": "info" });
+addRule('process-with-default-id', { "all": "error", "recommend": "error", "strict": "error" });
+addRule('process-with-default-name', { "all": "warn", "recommend": "info", "strict": "warn" });
+addRule('sequence-flow-with-default-id', { "all": "info", "recommend": "off", "strict": "info" });
+addRule('signal-with-default-name', { "all": "warn", "recommend": "info", "strict": "warn" });
+addRule('subprocess-with-default-id', { "all": "info", "recommend": "info", "strict": "warn" });
+addRule('user-task-without-assignment-details', { "all": "warn", "recommend": "warn", "strict": "error" });
+addRule('variable-name-with-invalid-character', { "all": "error", "recommend": "warn", "strict": "error" });
 
 module.exports = bpmnlintRulesConfig;
