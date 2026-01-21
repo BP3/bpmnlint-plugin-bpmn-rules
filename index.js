@@ -63,6 +63,7 @@ addRule('event-with-default-id', { recommended: 'info', strict: 'warn' });
 addRule('error-with-default-name', { recommended: 'warn', strict: 'error' });
 addRule('escalation-with-default-name', { recommended: 'info', strict: 'warn' });
 addRule('exclusive-gateway-has-default-flow', { recommended: 'info', strict: 'warn' });
+addRule('inclusive-gateway-has-default-flow', { recommended: 'info', strict: 'warn' });
 addRule('gateway-with-default-id', { recommended: 'info', strict: 'warn' });
 addRule('lane-with-default-id', { recommended: 'off', strict: 'info' });
 addRule('message-flow-with-default-id', { recommended: 'info', strict: 'info' });
