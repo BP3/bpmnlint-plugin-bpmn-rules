@@ -19,8 +19,8 @@ module.exports = function () {
   function check(node, reporter) {
     if (isAny(node, ['bpmn:MessageFlow'])) {
       let isNotSignificantId = false;
-      let notSignificantNamePattern = /^Flow_\d\w{6}$/i;
-      isNotSignificantId = notSignificantNamePattern.test(node.id);
+      let notSignificantIdPattern = /^Flow_\d\w{6}$/i;
+      isNotSignificantId = notSignificantIdPattern.test(node.id);
 
       //output
       if (isNotSignificantId) {
