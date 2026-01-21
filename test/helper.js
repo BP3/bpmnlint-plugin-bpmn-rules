@@ -1,7 +1,19 @@
+/*================================================================================
+ =
+ = Licensed Materials - Property of BP3 Global
+ =
+ =  bpmnlint-plugin-bpmn-rules
+ =
+ = Copyright © BP3 Global Inc. 2026. All Rights Reserved.
+ = This software is subject to copyright protection under
+ = the laws of the United States, United Kingdom and other countries.
+ =
+ =================================================================================*/
+
 const RuleTester = require('bpmnlint/lib/testers/rule-tester');
 const fs = require('fs');
 const path = require('path');
-const { logger } = require('./logger');
+const { logger } = require('../logger');
 
 /*
   Helper function that automatically extracts rule name from the calling test file
