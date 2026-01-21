@@ -16,21 +16,7 @@ const { verifyRule, generateFragment } = require('./helper');
 verifyRule(__filename, {
   valid: [
     {
-      name: "Process gateway with default flow",
-      moddleElement: createModdle(
-        generateFragment(`
-          <bpmn:exclusiveGateway id="Gateway_1u56rij" name="Payment successful?" default="Flow_01d6nrp">
-            <bpmn:outgoing>Flow_01d6nrp</bpmn:outgoing>
-            <bpmn:outgoing>Flow_16ibx6r</bpmn:outgoing>
-          </bpmn:exclusiveGateway>
-
-          <bpmn:sequenceFlow id="Flow_01d6nrp" sourceRef="Gateway_1u56rij" targetRef="Activity_A" />
-          <bpmn:sequenceFlow id="Flow_16ibx6r" sourceRef="Gateway_1u56rij" targetRef="Activity_B" />
-        `)
-      )
-    },
-    {
-      name: "Process with a branching gateway (with default) and a joining gateway",
+      name: "Process with a branching gateway (with default) and a join scenario",
       moddleElement: createModdle(
         generateFragment(`
           <bpmn:exclusiveGateway id="Gateway_1avjidf" name="which path?" default="Flow_0nf76et">
