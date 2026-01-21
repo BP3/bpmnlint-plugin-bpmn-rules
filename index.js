@@ -70,7 +70,7 @@ addRule('message-with-default-name', { recommended: 'warn', strict: 'error' });
 addRule('no-job-worker-user-task-implementation-type', { recommended: 'error', strict: 'error' });
 addRule('participant-with-default-id', { recommended: 'off', strict: 'info' });
 addRule('process-with-default-id', { recommended: 'error', strict: 'error' });
-addRule('process-with-empty-name', { recommended: 'info', strict: 'warn' });
+addRule('process-with-empty-name', { recommended: 'info', strict: 'error' });
 addRule('sequence-flow-with-default-id', { recommended: 'off', strict: 'info' });
 addRule('signal-with-default-name', { recommended: 'info', strict: 'warn' });
 addRule('subprocess-with-default-id', { recommended: 'info', strict: 'warn' });
