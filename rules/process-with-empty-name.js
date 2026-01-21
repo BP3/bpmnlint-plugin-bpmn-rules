@@ -25,7 +25,7 @@ module.exports = function () {
 
     // no name
     if (!name || !name.trim()) {
-      reporter.report(node.id, 'Process has a default name. Please provide a significant name!');
+      reporter.report(node.id, 'Process has a empty name. Please provide a significant name!');
     }
   }
 

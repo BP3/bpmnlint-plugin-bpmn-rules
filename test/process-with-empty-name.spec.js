@@ -16,7 +16,7 @@ const { verifyRule, generateFragment } = require('./helper');
 verifyRule(__filename, {
   valid: [
     {
-      name: "Process with valid process name",
+      name: 'Process with valid process name',
       moddleElement: createModdle(
         generateFragment(`
 <bpmn:process id="Process_1s1qrpb" name="Review Request Process">
@@ -27,7 +27,7 @@ verifyRule(__filename, {
   ],
   invalid: [
     {
-      name: "Process with default(empty) process name",
+      name: 'Process with empty process name',
       moddleElement: createModdle(
         generateFragment(`
 <bpmn:process id="Process_1s1qrpb">
@@ -37,7 +37,7 @@ verifyRule(__filename, {
       report: [
         {
           id: 'Process_1s1qrpb',
-        message: "Process has a default name. Please provide a significant name!"
+          message: 'Process has a empty name. Please provide a significant name!',
         },
       ],
     },
