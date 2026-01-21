@@ -21,7 +21,7 @@ verifyRule(__filename, {
       moddleElement: createModdle(
         generateFragment(`
 <bpmn:collaboration id="Collaboration_1u0tsgp">
-  <bpmn:participant id="Participant1" name="Participant 1" processRef="Process_1c5cw9j" />
+  <bpmn:participant id="Participant_OfficeAssistant" name="Participant 1" processRef="Process_1c5cw9j" />
 </bpmn:collaboration>
         `)
       ),
