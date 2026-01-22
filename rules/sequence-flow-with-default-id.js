@@ -24,10 +24,7 @@ module.exports = function () {
 
       //output
       if (isNotSignificantId) {
-        reporter.report(
-          node.id,
-          'Sequence flow has a default id. Please provide a significant id!'
-        );
+        reporter.report(node.id, 'Sequence flow has a default id. Please provide a significant id!');
       }
     }
   }

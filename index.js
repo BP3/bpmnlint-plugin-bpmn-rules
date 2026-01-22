@@ -35,7 +35,6 @@ let bpmnlintRulesConfig = {
 };
 
 function addRule(ruleName, severity) {
-
   const ruleFile = getRulePath(rulesPath, ruleName);
   if (!fs.existsSync(path.resolve(ruleFile + '.js'))) {
     logger.warn(`Warning: Rule file does not exist: ${ruleFile}` + '.js');

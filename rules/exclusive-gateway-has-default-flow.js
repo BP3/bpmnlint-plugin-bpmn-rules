@@ -10,31 +10,25 @@
  =
  =================================================================================*/
 
-const {
-    is
-  } = require('bpmnlint-utils');
+const { is } = require('bpmnlint-utils');
 
 /**
  * Rule that reports whether an exclusive gateway does not have a default sequence flow (applies to: Gateway)
  */
-module.exports = function() {
+module.exports = function () {
+  function check(node, reporter) {
+    if (is(node, 'bpmn:ExclusiveGateway')) {
+      let hasDefaultFlow = !!node.default || (node.outgoing || []).length <= 1;
 
-    function check(node, reporter) {
-      if (is(node, 'bpmn:ExclusiveGateway')) {
-
-        let hasDefaultFlow = !!node.default || ((node.outgoing || []).length <= 1);
-
-        //output
-        if (!hasDefaultFlow) {
-            reporter.report(node.id, 'Exclusive Gateway should always have a default sequence flow.');
-        }
+      //output
+      if (!hasDefaultFlow) {
+        reporter.report(node.id, 'Exclusive Gateway should always have a default sequence flow.');
       }
     }
+  }
 
-    return {
-      check: check,
-      appliesTo: [
-        'bpmn:ExclusiveGateway'
-      ]
-    };
+  return {
+    check: check,
+    appliesTo: ['bpmn:ExclusiveGateway'],
+  };
 };
