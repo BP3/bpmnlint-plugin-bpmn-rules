@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 
-
 /*================================================================================
  =
  = Licensed Materials - Property of BP3 Global
@@ -31,7 +30,6 @@ const logger = {
     console.error(chalk.bold(chalk.redBright('ERROR:')), ...args);
   },
 };
-
 
 module.exports = {
   logger,
