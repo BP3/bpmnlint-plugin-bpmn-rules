@@ -47,5 +47,5 @@ function generateFragment(xmlString) {
 
 module.exports = {
   verifyRule,
-  generateFragment
+  generateFragment,
 };

@@ -10,37 +10,34 @@
  =
  =================================================================================*/
 
-const {
-    is
-  } = require('bpmnlint-utils');
+const { is } = require('bpmnlint-utils');
 
 /**
  * Rule that reports whether user tasks are job workers.
  */
-module.exports = function() {
-
-    function check(node, reporter) {
-      if (!is(node, "bpmn:UserTask")) {
-        return;
-      }
-
-      let isJobWorker = true;
-
-      if (node.extensionElements != null && (node.extensionElements.values || []).length > 0) {
-        //the point is to find the extension that reports that the User Task is not a Job Worker
-        node.extensionElements.values.forEach(element => {
-          if (is(element, "zeebe:userTask")) {
-            isJobWorker = false;
-          }
-        });
-      }
-      //output
-      if (isJobWorker) {
-        reporter.report(node.id, 'User Task has disallowed Implementation Type: Job Worker');
-      }
+module.exports = function () {
+  function check(node, reporter) {
+    if (!is(node, 'bpmn:UserTask')) {
+      return;
     }
 
-    return {
-      check: check
-    };
+    let isJobWorker = true;
+
+    if (node.extensionElements != null && (node.extensionElements.values || []).length > 0) {
+      //the point is to find the extension that reports that the User Task is not a Job Worker
+      node.extensionElements.values.forEach((element) => {
+        if (is(element, 'zeebe:userTask')) {
+          isJobWorker = false;
+        }
+      });
+    }
+    //output
+    if (isJobWorker) {
+      reporter.report(node.id, 'User Task has disallowed Implementation Type: Job Worker');
+    }
+  }
+
+  return {
+    check: check,
   };
+};
