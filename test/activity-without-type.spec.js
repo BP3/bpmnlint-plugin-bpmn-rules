@@ -16,7 +16,7 @@ const { verifyRule, generateFragment } = require('./helper');
 verifyRule(__filename, {
   valid: [
     {
-      name: "Process activity with type",
+      name: 'Process activity with type',
       moddleElement: createModdle(
         generateFragment(`
 <bpmn:serviceTask id="ServiceTask_Valid" name="Charge Credit Card" />
@@ -26,7 +26,7 @@ verifyRule(__filename, {
   ],
   invalid: [
     {
-      name: "Process activity without any type",
+      name: 'Process activity without any type',
       moddleElement: createModdle(
         generateFragment(`
 <bpmn:process id="Process_178ti4z" isExecutable="false">
@@ -36,8 +36,8 @@ verifyRule(__filename, {
       ),
       report: [
         {
-          id: "Activity_0mw9waf",
-          message: "Artifact has no type. Please provide a task type!"
+          id: 'Activity_0mw9waf',
+          message: 'Artifact has no type. Please provide a task type!',
         },
       ],
     },

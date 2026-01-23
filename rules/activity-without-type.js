@@ -18,7 +18,7 @@ const { is } = require('bpmnlint-utils');
 module.exports = function () {
   function check(node, reporter) {
     if (is(node, 'bpmn:Activity')) {
-      let isTaskTypeSet = node["$type"] != 'bpmn:Task';
+      let isTaskTypeSet = node['$type'] != 'bpmn:Task';
 
       //output
       if (!isTaskTypeSet) {
@@ -28,6 +28,6 @@ module.exports = function () {
   }
 
   return {
-    check: check
+    check: check,
   };
 };
