@@ -1,5 +1,17 @@
 /* eslint-disable no-console */
 
+/*================================================================================
+ =
+ = Licensed Materials - Property of BP3 Global
+ =
+ =  bpmnlint-plugin-bpmn-rules
+ =
+ = Copyright © BP3 Global Inc. 2026. All Rights Reserved.
+ = This software is subject to copyright protection under
+ = the laws of the United States, United Kingdom and other countries.
+ =
+ =================================================================================*/
+
 const chalk = require('chalk').default;
 
 const logger = {
@@ -18,7 +30,6 @@ const logger = {
     console.error(chalk.bold(chalk.redBright('ERROR:')), ...args);
   },
 };
-
 
 module.exports = {
   logger,
