@@ -17,17 +17,13 @@ verifyRule(__filename, {
   valid: [
     {
       name: 'Process with valid escalation name',
-      moddleElement: createModdle(
-        generateFragment('<bpmn:escalation id="Escalation_0eb1rq6" name="EscalationToManager" />')
-      ),
+      moddleElement: createModdle(generateFragment('<bpmn:escalation id="Escalation_0eb1rq6" name="EscalationToManager" />')),
     },
   ],
   invalid: [
     {
       name: 'Process with default escalation name',
-      moddleElement: createModdle(
-        generateFragment('<bpmn:escalation id="Escalation_0eb1rq6" name="Escalation_0eb1rq6" />')
-      ),
+      moddleElement: createModdle(generateFragment('<bpmn:escalation id="Escalation_0eb1rq6" name="Escalation_0eb1rq6" />')),
       report: [
         {
           id: 'Escalation_0eb1rq6',
