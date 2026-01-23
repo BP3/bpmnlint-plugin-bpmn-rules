@@ -10,29 +10,26 @@
  =
  =================================================================================*/
 
-const {
-  isAny
-} = require('bpmnlint-utils');
+const { isAny } = require('bpmnlint-utils');
 
 /**
  * Rule that reports whether an artifact does not have a significant name (applies to: Signals)
  */
-module.exports = function() {
+module.exports = function () {
+  function check(node, reporter) {
+    if (isAny(node, ['bpmn:Signal'])) {
+      let isNotSignificantName = false;
+      let notSignificantNamePattern = /^Signal_\d\w{6}$/i;
+      isNotSignificantName = notSignificantNamePattern.test(node.name);
 
-    function check(node, reporter) {
-      if (isAny(node, ['bpmn:Signal'])) {
-        let isNotSignificantName = false;
-        let notSignificantNamePattern = /^Signal_\d\w{6}$/i;
-        isNotSignificantName = notSignificantNamePattern.test(node.name);
-
-        //output
-        if (isNotSignificantName) {
-            reporter.report(node.name, 'Signal has a default name. Please provide a significant name!');
-        }
+      //output
+      if (isNotSignificantName) {
+        reporter.report(node.name, 'Signal has a default name. Please provide a significant name!');
       }
     }
-  
-    return {
-      check: check
-    };
+  }
+
+  return {
+    check: check,
+  };
 };
