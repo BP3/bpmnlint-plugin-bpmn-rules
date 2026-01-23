@@ -12,3 +12,5 @@ node_modules/
 _TRASH_/
 
 !test/**/*.*mn
+
+.vscode/
