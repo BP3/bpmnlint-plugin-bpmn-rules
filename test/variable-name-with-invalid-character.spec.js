@@ -17,7 +17,8 @@ verifyRule(__filename, {
   valid: [
     {
       name: 'Standard valid variable names',
-      moddleElement: createModdle(generateFragment(`
+      moddleElement: createModdle(
+        generateFragment(`
 <bpmn:serviceTask id="Task_Valid">
   <bpmn:extensionElements>
     <zeebe:ioMapping>
@@ -27,11 +28,12 @@ verifyRule(__filename, {
   </bpmn:extensionElements>
 </bpmn:serviceTask>
         `)
-      )
+      ),
     },
     {
       name: 'Connector templates allow periods',
-      moddleElement: createModdle(generateFragment(`
+      moddleElement: createModdle(
+        generateFragment(`
 <bpmn:serviceTask id="Connector_Task" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2">
   <bpmn:extensionElements>
     <zeebe:ioMapping>
@@ -41,13 +43,14 @@ verifyRule(__filename, {
   </bpmn:extensionElements>
 </bpmn:serviceTask>
         `)
-      )
-    }
+      ),
+    },
   ],
   invalid: [
     {
       name: 'Input starts with a number',
-      moddleElement: createModdle(generateFragment(`
+      moddleElement: createModdle(
+        generateFragment(`
 <bpmn:process id="Process_1" isExecutable="false">
   <bpmn:serviceTask id="Task_NumStart">
     <bpmn:extensionElements>
@@ -62,13 +65,14 @@ verifyRule(__filename, {
       report: [
         {
           id: 'Task_NumStart',
-          message: "Input variable name '2InputVariable' must not start with a number (0-9)."
+          message: "Input variable name '2InputVariable' must not start with a number (0-9).",
         },
       ],
     },
     {
       name: 'Input with whitespace and Output with operator',
-      moddleElement: createModdle(generateFragment(`
+      moddleElement: createModdle(
+        generateFragment(`
 <bpmn:process id="Process_1" isExecutable="false">
   <bpmn:serviceTask id="Task_MixedErrors">
     <bpmn:extensionElements>
@@ -84,17 +88,18 @@ verifyRule(__filename, {
       report: [
         {
           id: 'Task_MixedErrors',
-          message: "Input variable name 'Input Variable' contains disallowed whitespace. Use camelCase or underscores instead."
+          message: "Input variable name 'Input Variable' contains disallowed whitespace. Use camelCase or underscores instead.",
         },
         {
           id: 'Task_MixedErrors',
-          message: "Output variable name 'Output-Variable' must not contain an invalid character (+,-,*,/,=,>,?,.)."
-        }
-      ]
-   },
-   {
-     name: 'Multiple elements: Catch Event and Task failures',
-     moddleElement: createModdle(generateFragment(`
+          message: "Output variable name 'Output-Variable' must not contain an invalid character (+,-,*,/,=,>,?,.).",
+        },
+      ],
+    },
+    {
+      name: 'Multiple elements: Catch Event and Task failures',
+      moddleElement: createModdle(
+        generateFragment(`
 <bpmn:process id="Process_1" isExecutable="false">
   <bpmn:serviceTask id="Task_Error">
     <bpmn:extensionElements>
@@ -113,21 +118,22 @@ verifyRule(__filename, {
   </bpmn:intermediateCatchEvent>
 </bpmn:process>
         `)
-       ),
-     report: [
-       {
-         id: 'Task_Error',
-         message: "Output variable name 'var=1' must not contain an invalid character (+,-,*,/,=,>,?,.)."
-       },
-       {
-         id: 'Timer_Error',
-         message: "Output variable name 'var?invalid' must not contain an invalid character (+,-,*,/,=,>,?,.)."
-       }
-     ]
-   },
-   {
-     name: 'Script Result with accumulated errors (Issue #11)',
-     moddleElement: createModdle(generateFragment(`
+      ),
+      report: [
+        {
+          id: 'Task_Error',
+          message: "Output variable name 'var=1' must not contain an invalid character (+,-,*,/,=,>,?,.).",
+        },
+        {
+          id: 'Timer_Error',
+          message: "Output variable name 'var?invalid' must not contain an invalid character (+,-,*,/,=,>,?,.).",
+        },
+      ],
+    },
+    {
+      name: 'Script Result with accumulated errors (Issue #11)',
+      moddleElement: createModdle(
+        generateFragment(`
 <bpmn:process id="Process_1" isExecutable="false">
   <bpmn:scriptTask id="Script_Fail">
     <bpmn:extensionElements>
@@ -140,9 +146,10 @@ verifyRule(__filename, {
       report: [
         {
           id: 'Script_Fail',
-          message: "Script Result variable name '1customer/name*' must not contain an invalid character (+,-,*,/,=,>,?,.). Script Result variable name '1customer/name*' must not start with a number (0-9)."
+          message:
+            "Script Result variable name '1customer/name*' must not contain an invalid character (+,-,*,/,=,>,?,.). Script Result variable name '1customer/name*' must not start with a number (0-9).",
         },
       ],
     },
-  ]
+  ],
 });

@@ -10,40 +10,35 @@
  =
  =================================================================================*/
 
-const {
-  is, isAny
-} = require('bpmnlint-utils');
+const { is, isAny } = require('bpmnlint-utils');
 
-const APPLICABLE_NODE_TYPES =  [
-  'bpmn:Activity',
-  'bpmn:Event'
-];
+const APPLICABLE_NODE_TYPES = ['bpmn:Activity', 'bpmn:Event'];
 
 const TYPICAL_CHECKS = [
   {
-    name: "uses-whitespace",
+    name: 'uses-whitespace',
     regex: /\s/,
-    message: "contains disallowed whitespace. Use camelCase or underscores instead."
+    message: 'contains disallowed whitespace. Use camelCase or underscores instead.',
   },
   {
-    name: "using-operator-character",
+    name: 'using-operator-character',
     regex: /[+\-*/=>?\.]/,
-    message: "must not contain an invalid character (+,-,*,/,=,>,?,.)."
+    message: 'must not contain an invalid character (+,-,*,/,=,>,?,.).',
   },
   {
-    name: "starts-with-digit",
+    name: 'starts-with-digit',
     regex: /^\d/,
-    message: "must not start with a number (0-9)."
-  }
+    message: 'must not start with a number (0-9).',
+  },
 ];
 
 const CONNECTOR_TEMPLATE_CHECKS = [
-  ...(TYPICAL_CHECKS.filter(item => item.name != "using-operator-character")),
+  ...TYPICAL_CHECKS.filter((item) => item.name != 'using-operator-character'),
   {
-    name: "using-operator-character",
+    name: 'using-operator-character',
     regex: /[+\-*/=>?]/,
-    message: "must not contain an invalid character (+,-,*,/,=,>,?)."
-  }
+    message: 'must not contain an invalid character (+,-,*,/,=,>,?).',
+  },
 ];
 
 /**
@@ -63,7 +58,7 @@ function checkVariableName(name, elementId, reporter, prefix, isNodeUsingConnect
   }
   for (const check of CHECKS) {
     if (check.regex.test(name)) {
-      const prefixString = (prefix != null && prefix.length > 0) ? prefix : '';
+      const prefixString = prefix != null && prefix.length > 0 ? prefix : '';
       reportMessage += ` ${prefixString} variable name '${name}' ${check.message}`;
       //reporter.report(elementId, `${prefixString} variable name '${name}' ${check.message}`);
       //return;
@@ -75,17 +70,12 @@ function checkVariableName(name, elementId, reporter, prefix, isNodeUsingConnect
 }
 
 function isConnectorTemplate(node) {
-  return node["$attrs"]
-    && node["$attrs"]['zeebe:modelerTemplate'] != null
-    && node["$attrs"]['zeebe:modelerTemplate'].trim() != '';
+  return node['$attrs'] && node['$attrs']['zeebe:modelerTemplate'] != null && node['$attrs']['zeebe:modelerTemplate'].trim() != '';
 }
 
-module.exports = function() {
-
+module.exports = function () {
   function check(node, reporter) {
-
     if (isAny(node, APPLICABLE_NODE_TYPES)) {
-
       const extensionElements = node.extensionElements;
       if (!extensionElements || !extensionElements.values) {
         return;
@@ -113,6 +103,6 @@ module.exports = function() {
 
   return {
     check: check,
-    appliesTo: APPLICABLE_NODE_TYPES
+    appliesTo: APPLICABLE_NODE_TYPES,
   };
 };
