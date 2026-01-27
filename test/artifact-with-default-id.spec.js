@@ -20,6 +20,8 @@ verifyRule(__filename, {
       moddleElement: createModdle(
         generateFragment(`
 <bpmn:process id="Process_1s1qrpb">
+  <bpmn:exclusiveGateway id="Gateway" name="Request Approved?">
+  </bpmn:exclusiveGateway>
 </bpmn:process>
         `)
       ),
