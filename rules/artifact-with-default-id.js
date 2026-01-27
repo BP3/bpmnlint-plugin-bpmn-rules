@@ -19,8 +19,8 @@ module.exports = function () {
   function check(node, reporter) {
     if (isAny(node, ['bpmn:Activity', 'bpmn:Gateway'])) {
       let isNotSignificantId = false;
-      let notSignificantNamePattern = /^(Activity|Gateway)_\d\w{6}/i;
-      isNotSignificantId = notSignificantNamePattern.test(node.id);
+      let notSignificantIdPattern = /^(Activity|Gateway)_\d\w{6}/i;
+      isNotSignificantId = notSignificantIdPattern.test(node.id);
 
       //output
       if (isNotSignificantId) {
