@@ -11,6 +11,7 @@
  =================================================================================*/
 
 const { isAny } = require('bpmnlint-utils');
+const { isDefaultIdOrName } = require('./helper');
 
 /**
  * Rule that reports whether an artifact does not have a significant id (applies to: Errors)
@@ -18,12 +19,8 @@ const { isAny } = require('bpmnlint-utils');
 module.exports = function () {
   function check(node, reporter) {
     if (isAny(node, ['bpmn:Error'])) {
-      let isNotSignificantName = false;
-      let notSignificantNamePattern = /^Error_\d\w{6}$/i;
-      isNotSignificantName = notSignificantNamePattern.test(node.name);
-
       //output
-      if (isNotSignificantName) {
+      if (isDefaultIdOrName('Error', node.name)) {
         reporter.report(node.name, 'Error has a default name. Please provide a significant name!');
       }
     }
