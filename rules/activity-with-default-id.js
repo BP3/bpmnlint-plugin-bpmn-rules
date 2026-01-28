@@ -11,7 +11,7 @@
  =================================================================================*/
 
 const { isAny } = require('bpmnlint-utils');
-const { isDefaultIdOrName } = require('../test/helper');
+const { isDefaultIdOrName } = require('./helper');
 
 /**
  * Rule that reports whether an artifact does not have a significant id (applies to: Tasks/Activities)

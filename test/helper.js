@@ -45,14 +45,7 @@ function generateFragment(xmlString) {
     `;
 }
 
-function isDefaultIdOrName(prefix, value) {
-  if (!value) return false;
-  let defaultRE = new RegExp(`^${prefix}_\\d\\w{6}$`, 'i');
-  return defaultRE.test(value);
-}
-
 module.exports = {
   verifyRule,
-  generateFragment,
-  isDefaultIdOrName,
+  generateFragment
 };
