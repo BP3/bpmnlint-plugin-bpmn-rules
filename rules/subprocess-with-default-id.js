@@ -11,6 +11,7 @@
  =================================================================================*/
 
 const { isAny } = require('bpmnlint-utils');
+const { isDefaultIdOrName } = require('../test/helper');
 
 /**
  * Rule that reports whether an artifact does not have a significant id (applies to: SubProcesses)
@@ -18,12 +19,8 @@ const { isAny } = require('bpmnlint-utils');
 module.exports = function () {
   function check(node, reporter) {
     if (isAny(node, ['bpmn:SubProcess'])) {
-      let isNotSignificantId = false;
-      let notSignificantIdPattern = /^Activity_\d\w{6}$/i;
-      isNotSignificantId = notSignificantIdPattern.test(node.id);
-
       //output
-      if (isNotSignificantId) {
+      if (isDefaultIdOrName('Activity', node.id)) {
         reporter.report(node.id, 'Sub-process has a default id. Please provide a significant id!');
       }
     }

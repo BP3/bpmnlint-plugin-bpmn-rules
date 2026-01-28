@@ -11,6 +11,7 @@
  =================================================================================*/
 
 const { isAny } = require('bpmnlint-utils');
+const { isDefaultIdOrName } = require('../test/helper');
 
 /**
  * Rule that reports whether an artifact does not have a significant id (applies to: Lanes)
@@ -18,12 +19,8 @@ const { isAny } = require('bpmnlint-utils');
 module.exports = function () {
   function check(node, reporter) {
     if (isAny(node, ['bpmn:Lane'])) {
-      let isNotSignificantId = false;
-      let notSignificantIdPattern = /^Lane_\d\w{6}$/i;
-      isNotSignificantId = notSignificantIdPattern.test(node.id);
-
       //output
-      if (isNotSignificantId) {
+      if (isDefaultIdOrName('Lane', node.id)) {
         reporter.report(node.id, 'Lane has a default id. Please provide a significant id!');
       }
     }
