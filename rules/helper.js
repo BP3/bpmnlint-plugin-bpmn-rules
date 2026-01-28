@@ -17,5 +17,5 @@ function isDefaultIdOrName(prefix, value) {
 }
 
 module.exports = {
-  isDefaultIdOrName
+  isDefaultIdOrName,
 };
