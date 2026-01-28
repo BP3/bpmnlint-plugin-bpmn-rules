@@ -10,8 +10,14 @@
  =
  =================================================================================*/
 
+/**
+ * Helper function to check if a value matches the default BPMN auto-generated pattern.
+ * @param {string} prefix - The mandatory prefix (e.g., 'Activity', 'Gateway', 'Process')
+ * @param {string} value - The ID string to check
+ */
+
 function isDefaultIdOrName(prefix, value) {
-  if (!value) return false;
+  if (!prefix || !value) return false;
   let defaultRE = new RegExp(`^${prefix}_\\d\\w{6}$`, 'i');
   return defaultRE.test(value);
 }
