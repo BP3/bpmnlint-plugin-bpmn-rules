@@ -11,6 +11,7 @@
  =================================================================================*/
 
 const { isAny } = require('bpmnlint-utils');
+const { isDefaultIdOrName } = require('./helper');
 
 /**
  * Rule that reports whether an artifact does not have a significant id (applies to: Processes)
@@ -18,12 +19,8 @@ const { isAny } = require('bpmnlint-utils');
 module.exports = function () {
   function check(node, reporter) {
     if (isAny(node, ['bpmn:Process'])) {
-      let isNotSignificantId = false;
-      let notSignificantNamePattern = /^Process_\d\w{6}$/i;
-      isNotSignificantId = notSignificantNamePattern.test(node.id);
-
       //output
-      if (isNotSignificantId) {
+      if (isDefaultIdOrName('Process', node.id)) {
         reporter.report(node.id, 'Artifact has a default id. Please provide a significant id!');
       }
     }

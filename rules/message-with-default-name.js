@@ -11,6 +11,7 @@
  =================================================================================*/
 
 const { isAny } = require('bpmnlint-utils');
+const { isDefaultIdOrName } = require('./helper');
 
 /**
  * Rule that reports whether an artifact does not have a significant name (applies to: Messages)
@@ -18,12 +19,8 @@ const { isAny } = require('bpmnlint-utils');
 module.exports = function () {
   function check(node, reporter) {
     if (isAny(node, ['bpmn:Message'])) {
-      let isNotSignificantName = false;
-      let notSignificantNamePattern = /^Message_\d\w{6}$/i;
-      isNotSignificantName = notSignificantNamePattern.test(node.name);
-
       //output
-      if (isNotSignificantName) {
+      if (isDefaultIdOrName('Message', node.name)) {
         reporter.report(node.id, 'Message has a default name. Please provide a significant name!');
       }
     }
