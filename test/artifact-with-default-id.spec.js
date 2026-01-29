@@ -19,12 +19,10 @@ verifyRule(__filename, {
       name: 'Process with valid activity and gateway ids',
       moddleElement: createModdle(
         generateFragment(`
-<bpmn:process id="Process_1s1qrpb">
   <bpmn:task id="ReviewRequest" name="Review Request">
   </bpmn:task>
   <bpmn:exclusiveGateway id="Gateway" name="Request Approved?">
   </bpmn:exclusiveGateway>
-</bpmn:process>
         `)
       ),
     },
@@ -34,10 +32,8 @@ verifyRule(__filename, {
       name: 'Process with default activity id',
       moddleElement: createModdle(
         generateFragment(`
-<bpmn:process id="Process_1s1qrpb">
   <bpmn:task id="Activity_1w64wtr" name="Review Request">
   </bpmn:task>
-</bpmn:process>
         `)
       ),
       report: [
@@ -51,10 +47,8 @@ verifyRule(__filename, {
       name: 'Process with default gateway id',
       moddleElement: createModdle(
         generateFragment(`
-<bpmn:process id="Process_1s1qrpb">
   <bpmn:exclusiveGateway id="Gateway_0hdljrh">
   </bpmn:exclusiveGateway>
-</bpmn:process>
         `)
       ),
       report: [

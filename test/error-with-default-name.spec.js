@@ -23,7 +23,7 @@ verifyRule(__filename, {
   invalid: [
     {
       name: 'Process with default error name',
-      moddleElement: createModdle(generateFragment(`<bpmn:error id="Error_0fv8vco" name="Error_16pj7t5" />`)),
+      moddleElement: createModdle(generateFragment(`<bpmn:error id="Error_0fv8vco" name="Error_16pj7t5" />`, false)),
       report: [
         {
           id: 'Error_16pj7t5',

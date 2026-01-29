@@ -117,13 +117,11 @@ verifyRule(__filename, {
       name: 'UserTask with empty assignment details',
       moddleElement: createModdle(
         generateFragment(`
-<bpmn:process id="Process_1xikhde">
   <bpmn:userTask id="UserTaskAssignmentEmpty" name="Do Something">
     <bpmn:extensionElements>
       <zeebe:assignmentDefinition assignee="" candidateGroups="" candidateUsers="" />
     </bpmn:extensionElements>
   </bpmn:userTask>
-</bpmn:process>
         `)
       ),
       report: [
@@ -137,10 +135,8 @@ verifyRule(__filename, {
       name: 'UserTask without assignment details',
       moddleElement: createModdle(
         generateFragment(`
-<bpmn:process id="Process_1xikhde">
   <bpmn:userTask id="UserTaskWithoutAssignmentDetails" name="Do Something">
   </bpmn:userTask>
-</bpmn:process>
         `)
       ),
       report: [

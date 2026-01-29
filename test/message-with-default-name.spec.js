@@ -23,7 +23,7 @@ verifyRule(__filename, {
   invalid: [
     {
       name: 'Process with default message name',
-      moddleElement: createModdle(generateFragment('<bpmn:message id="Message_316gp6b" name="Message_316gp6b" />')),
+      moddleElement: createModdle(generateFragment('<bpmn:message id="Message_316gp6b" name="Message_316gp6b" />', false)),
       report: [
         {
           id: 'Message_316gp6b',

@@ -30,11 +30,14 @@ verifyRule(__filename, {
     {
       name: 'Process with default message flow id',
       moddleElement: createModdle(
-        generateFragment(`
+        generateFragment(
+          `
 <bpmn:collaboration id="Collaboration_1u0tsgp">
   <bpmn:messageFlow id="Flow_0qwei4j" sourceRef="StartProcessActivity" targetRef="Activity_150fsc7" />
 </bpmn:collaboration>
-        `)
+        `,
+          false
+        )
       ),
       report: [
         {

@@ -23,7 +23,7 @@ verifyRule(__filename, {
   invalid: [
     {
       name: 'Process with default signal name',
-      moddleElement: createModdle(generateFragment(`<bpmn:signal id="Signal_23t8lvt" name="Signal_23t8lvt" />`)),
+      moddleElement: createModdle(generateFragment(`<bpmn:signal id="Signal_23t8lvt" name="Signal_23t8lvt" />`, false)),
       report: [
         {
           id: 'Signal_23t8lvt',

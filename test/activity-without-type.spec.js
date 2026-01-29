@@ -29,9 +29,7 @@ verifyRule(__filename, {
       name: 'Process activity without any type',
       moddleElement: createModdle(
         generateFragment(`
-<bpmn:process id="Process_178ti4z" isExecutable="false">
   <bpmn:task id="Activity_0mw9waf" name="Proceed Payment" />
-</bpmn:process>
         `)
       ),
       report: [

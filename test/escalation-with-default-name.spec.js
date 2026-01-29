@@ -23,7 +23,7 @@ verifyRule(__filename, {
   invalid: [
     {
       name: 'Process with default escalation name',
-      moddleElement: createModdle(generateFragment(`<bpmn:escalation id="Escalation_0eb1rq6" name="Escalation_0eb1rq6" />`)),
+      moddleElement: createModdle(generateFragment(`<bpmn:escalation id="Escalation_0eb1rq6" name="Escalation_0eb1rq6" />`, false)),
       report: [
         {
           id: 'Escalation_0eb1rq6',

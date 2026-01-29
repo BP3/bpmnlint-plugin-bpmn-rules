@@ -37,10 +37,17 @@ function verifyRule(specFilePath, testCases) {
   RuleTester.verify(ruleName, rule, testCases);
 }
 
-function generateFragment(xmlString) {
+/**
+ * Generates a BPMN XML fragment with an optional process wrapper.
+ * @param {string} xmlString
+ * @param {boolean} generateProcess - Defaults to true to avoid breaking existing tests
+ */
+function generateFragment(xmlString, generateProcess = true) {
   return `
     <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0mryikp">
+      ${generateProcess ? `<bpmn:process id="Process_078ti4z">` : ''}
       ${xmlString}
+      ${generateProcess ? `</bpmn:process>` : ''}
     </bpmn:definitions>
     `;
 }

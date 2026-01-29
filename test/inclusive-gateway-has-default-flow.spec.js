@@ -47,7 +47,6 @@ verifyRule(__filename, {
       name: 'Process gateway without default flow',
       moddleElement: createModdle(
         generateFragment(`
-<bpmn:process id="Process_1" isExecutable="false">
   <bpmn:inclusiveGateway id="Gateway_0knccn5">
     <bpmn:outgoing>Flow_1</bpmn:outgoing>
     <bpmn:outgoing>Flow_2</bpmn:outgoing>
@@ -58,7 +57,6 @@ verifyRule(__filename, {
 
   <bpmn:task id="Task_A" />
   <bpmn:task id="Task_B" />
-</bpmn:process>
         `)
       ),
       report: [

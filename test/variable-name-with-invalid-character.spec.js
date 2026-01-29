@@ -51,7 +51,6 @@ verifyRule(__filename, {
       name: 'Input starts with a number',
       moddleElement: createModdle(
         generateFragment(`
-<bpmn:process id="Process_1" isExecutable="false">
   <bpmn:serviceTask id="Task_NumStart">
     <bpmn:extensionElements>
       <zeebe:ioMapping>
@@ -59,7 +58,6 @@ verifyRule(__filename, {
       </zeebe:ioMapping>
     </bpmn:extensionElements>
   </bpmn:serviceTask>
-</bpmn:process>
         `)
       ),
       report: [
@@ -73,7 +71,6 @@ verifyRule(__filename, {
       name: 'Input with whitespace and Output with operator',
       moddleElement: createModdle(
         generateFragment(`
-<bpmn:process id="Process_1" isExecutable="false">
   <bpmn:serviceTask id="Task_MixedErrors">
     <bpmn:extensionElements>
       <zeebe:ioMapping>
@@ -82,7 +79,6 @@ verifyRule(__filename, {
       </zeebe:ioMapping>
     </bpmn:extensionElements>
  </bpmn:serviceTask>
-</bpmn:process>
         `)
       ),
       report: [
@@ -100,7 +96,6 @@ verifyRule(__filename, {
       name: 'Multiple elements: Catch Event and Task failures',
       moddleElement: createModdle(
         generateFragment(`
-<bpmn:process id="Process_1" isExecutable="false">
   <bpmn:serviceTask id="Task_Error">
     <bpmn:extensionElements>
       <zeebe:ioMapping>
@@ -116,7 +111,6 @@ verifyRule(__filename, {
     </bpmn:extensionElements>
     <bpmn:timerEventDefinition />
   </bpmn:intermediateCatchEvent>
-</bpmn:process>
         `)
       ),
       report: [
@@ -134,13 +128,11 @@ verifyRule(__filename, {
       name: 'Script Result with accumulated errors (Issue #11)',
       moddleElement: createModdle(
         generateFragment(`
-<bpmn:process id="Process_1" isExecutable="false">
   <bpmn:scriptTask id="Script_Fail">
     <bpmn:extensionElements>
       <zeebe:script resultVariable="1customer/name*" />
     </bpmn:extensionElements>
   </bpmn:scriptTask>
-</bpmn:process>
         `)
       ),
       report: [
