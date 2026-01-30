@@ -17,13 +17,24 @@ verifyRule(__filename, {
   valid: [
     {
       name: 'Process with valid message name',
-      moddleElement: createModdle(generateFragment('<bpmn:message id="Message_2ajovd3" name="MessageBoundaryEvent" />')),
+      moddleElement: createModdle(
+        generateFragment(`
+<bpmn:message id="Message_2ajovd3" name="MessageBoundaryEvent" />
+        `)
+      ),
     },
   ],
   invalid: [
     {
       name: 'Process with default message name',
-      moddleElement: createModdle(generateFragment('<bpmn:message id="Message_316gp6b" name="Message_316gp6b" />', false)),
+      moddleElement: createModdle(
+        generateFragment(
+          `
+<bpmn:message id="Message_316gp6b" name="Message_316gp6b" />
+      `,
+          false
+        )
+      ),
       report: [
         {
           id: 'Message_316gp6b',

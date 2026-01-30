@@ -29,7 +29,7 @@ verifyRule(__filename, {
       name: 'Process activity without any type',
       moddleElement: createModdle(
         generateFragment(`
-  <bpmn:task id="Activity_0mw9waf" name="Proceed Payment" />
+<bpmn:task id="Activity_0mw9waf" name="Proceed Payment" />
         `)
       ),
       report: [

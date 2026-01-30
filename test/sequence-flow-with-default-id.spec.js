@@ -19,7 +19,7 @@ verifyRule(__filename, {
       name: 'Process with valid flow id',
       moddleElement: createModdle(
         generateFragment(`
-  <bpmn:sequenceFlow id="Flow" sourceRef="StartEvent_1" targetRef="StartProcessActivity" />
+<bpmn:sequenceFlow id="Flow" sourceRef="StartEvent_1" targetRef="StartProcessActivity" />
         `)
       ),
     },
@@ -29,7 +29,7 @@ verifyRule(__filename, {
       name: 'Process with default flow id',
       moddleElement: createModdle(
         generateFragment(`
-  <bpmn:sequenceFlow id="Flow_0udjkr6" sourceRef="StartEvent_1" targetRef="StartProcessActivity" />
+<bpmn:sequenceFlow id="Flow_0udjkr6" sourceRef="StartEvent_1" targetRef="StartProcessActivity" />
         `)
       ),
       report: [

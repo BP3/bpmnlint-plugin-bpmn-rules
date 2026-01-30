@@ -19,8 +19,8 @@ verifyRule(__filename, {
       name: 'Process with valid gateway id',
       moddleElement: createModdle(
         generateFragment(`
-  <bpmn:exclusiveGateway id="Gateway" name="Request Approved?">
-  </bpmn:exclusiveGateway>
+<bpmn:exclusiveGateway id="Gateway" name="Request Approved?">
+</bpmn:exclusiveGateway>
         `)
       ),
     },
@@ -30,8 +30,8 @@ verifyRule(__filename, {
       name: 'Process with default gateway id',
       moddleElement: createModdle(
         generateFragment(`
-  <bpmn:exclusiveGateway id="Gateway_0hdljrh">
-  </bpmn:exclusiveGateway>
+<bpmn:exclusiveGateway id="Gateway_0hdljrh">
+</bpmn:exclusiveGateway>
         `)
       ),
       report: [

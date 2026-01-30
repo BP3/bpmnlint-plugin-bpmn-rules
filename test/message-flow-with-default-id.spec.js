@@ -19,9 +19,9 @@ verifyRule(__filename, {
       name: 'Process with valid message flow id',
       moddleElement: createModdle(
         generateFragment(`
-  <bpmn:collaboration id="Collaboration_1u0tsgp">
-    <bpmn:messageFlow id="MessageFlow_Task1_To_Task2" sourceRef="StartProcessActivity" targetRef="Activity_150fsc7" />
-  </bpmn:collaboration>
+<bpmn:collaboration id="Collaboration_1u0tsgp">
+  <bpmn:messageFlow id="MessageFlow_Task1_To_Task2" sourceRef="StartProcessActivity" targetRef="Activity_150fsc7" />
+</bpmn:collaboration>
         `)
       ),
     },

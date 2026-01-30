@@ -19,11 +19,11 @@ verifyRule(__filename, {
       name: 'UserTask with Zeebe UserTask (valid)',
       moddleElement: createModdle(
         generateFragment(`
-  <bpmn:userTask id="Activity_ValidUserTask" name="zeebe task">
-    <bpmn:extensionElements>
-      <zeebe:userTask />
-    </bpmn:extensionElements>
-  </bpmn:userTask>
+<bpmn:userTask id="Activity_ValidUserTask" name="zeebe task">
+  <bpmn:extensionElements>
+    <zeebe:userTask />
+  </bpmn:extensionElements>
+</bpmn:userTask>
         `)
       ),
     },
@@ -31,12 +31,12 @@ verifyRule(__filename, {
       name: 'UserTask with a Camunda form',
       moddleElement: createModdle(
         generateFragment(`
-  <bpmn:userTask id="Activity_0b74psj" name="Do Something">
-    <bpmn:extensionElements>
-      <zeebe:userTask />
-      <zeebe:assignmentDefinition assignee="SampleUser" />
-    </bpmn:extensionElements>
-  </bpmn:userTask>
+<bpmn:userTask id="Activity_0b74psj" name="Do Something">
+  <bpmn:extensionElements>
+    <zeebe:userTask />
+    <zeebe:assignmentDefinition assignee="SampleUser" />
+  </bpmn:extensionElements>
+</bpmn:userTask>
         `)
       ),
     },
@@ -46,11 +46,11 @@ verifyRule(__filename, {
       name: 'UserTask with a job worker external form',
       moddleElement: createModdle(
         generateFragment(`
-  <bpmn:userTask id="Activity_JobWorkerUserTask" name="external form">
-    <bpmn:extensionElements>
-      <zeebe:formDefinition externalReference="" />
-    </bpmn:extensionElements>
-  </bpmn:userTask>
+<bpmn:userTask id="Activity_JobWorkerUserTask" name="external form">
+  <bpmn:extensionElements>
+    <zeebe:formDefinition externalReference="" />
+  </bpmn:extensionElements>
+</bpmn:userTask>
         `)
       ),
       report: [
