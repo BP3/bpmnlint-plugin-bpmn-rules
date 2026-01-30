@@ -34,7 +34,7 @@ verifyRule(__filename, {
         generateFragment(
           `
 <bpmn:process id="Process_1s1qrpb" />
-        `,
+          `,
           false
         )
       ),

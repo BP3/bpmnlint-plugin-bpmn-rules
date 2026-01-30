@@ -31,7 +31,7 @@ verifyRule(__filename, {
         generateFragment(
           `
 <bpmn:escalation id="Escalation_0eb1rq6" name="Escalation_0eb1rq6" />
-      `,
+          `,
           false
         )
       ),

@@ -21,7 +21,7 @@ verifyRule(__filename, {
         generateFragment(
           `
 <bpmn:process id="ReviewRequest_Process" />
-        `,
+          `,
           false
         )
       ),

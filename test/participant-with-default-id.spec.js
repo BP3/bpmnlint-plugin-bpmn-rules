@@ -37,7 +37,7 @@ verifyRule(__filename, {
 <bpmn:collaboration id="Collaboration_1u0tsgp">
   <bpmn:participant id="Participant_0gkguwx"/>
 </bpmn:collaboration>
-        `,
+          `,
           false
         )
       ),

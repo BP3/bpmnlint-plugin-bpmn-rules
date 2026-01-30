@@ -19,11 +19,11 @@ verifyRule(__filename, {
       name: 'Process with valid lane id',
       moddleElement: createModdle(
         generateFragment(`
-  <bpmn:laneSet id="LaneSet_1vj1ghx">
-    <bpmn:lane id="Lane1">
-      <bpmn:flowNodeRef>StartProcessActivity</bpmn:flowNodeRef>
-    </bpmn:lane>
-  </bpmn:laneSet>
+<bpmn:laneSet id="LaneSet_1vj1ghx">
+  <bpmn:lane id="Lane1">
+    <bpmn:flowNodeRef>StartProcessActivity</bpmn:flowNodeRef>
+  </bpmn:lane>
+</bpmn:laneSet>
         `)
       ),
     },
@@ -33,11 +33,11 @@ verifyRule(__filename, {
       name: 'Process with default lane id',
       moddleElement: createModdle(
         generateFragment(`
-  <bpmn:laneSet id="LaneSet_1vj1ghx">
-    <bpmn:lane id="Lane_09cnnha">
-      <bpmn:flowNodeRef>StartProcessActivity</bpmn:flowNodeRef>
-    </bpmn:lane>
-  </bpmn:laneSet>
+<bpmn:laneSet id="LaneSet_1vj1ghx">
+  <bpmn:lane id="Lane_09cnnha">
+    <bpmn:flowNodeRef>StartProcessActivity</bpmn:flowNodeRef>
+  </bpmn:lane>
+</bpmn:laneSet>
         `)
       ),
       report: [

@@ -32,8 +32,8 @@ verifyRule(__filename, {
       name: 'Process with default event id',
       moddleElement: createModdle(
         generateFragment(`
-  <bpmn:boundaryEvent id="Event_1490aig" attachedToRef="Activity">
-  </bpmn:boundaryEvent>
+<bpmn:boundaryEvent id="Event_1490aig" attachedToRef="Activity">
+</bpmn:boundaryEvent>
         `)
       ),
       report: [

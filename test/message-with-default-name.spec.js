@@ -31,7 +31,7 @@ verifyRule(__filename, {
         generateFragment(
           `
 <bpmn:message id="Message_316gp6b" name="Message_316gp6b" />
-      `,
+          `,
           false
         )
       ),
