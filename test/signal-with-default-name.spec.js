@@ -18,9 +18,12 @@ verifyRule(__filename, {
     {
       name: 'Process with valid signal name',
       moddleElement: createModdle(
-        generateFragment(`
+        generateFragment(
+          `
 <bpmn:signal id="Signal_23t8lvt" name="Signal" />
-        `)
+          `,
+          false
+        )
       ),
     },
   ],

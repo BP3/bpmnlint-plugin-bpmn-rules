@@ -18,9 +18,12 @@ verifyRule(__filename, {
     {
       name: 'Process with valid escalation name',
       moddleElement: createModdle(
-        generateFragment(`
+        generateFragment(
+          `
 <bpmn:escalation id="Escalation_0eb1rq6" name="EscalationToManager" />
-      `)
+          `,
+          false
+        )
       ),
     },
   ],

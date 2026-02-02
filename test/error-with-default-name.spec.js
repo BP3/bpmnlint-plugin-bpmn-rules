@@ -18,9 +18,12 @@ verifyRule(__filename, {
     {
       name: 'Process with valid error name',
       moddleElement: createModdle(
-        generateFragment(`
+        generateFragment(
+          `
 <bpmn:error id="Error_0h09e3l" name="ErrorFailTask" />
-      `)
+         `,
+          false
+        )
       ),
     },
   ],

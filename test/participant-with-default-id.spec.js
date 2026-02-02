@@ -19,11 +19,14 @@ verifyRule(__filename, {
       name: 'Process with valid participant id',
 
       moddleElement: createModdle(
-        generateFragment(`
+        generateFragment(
+          `
 <bpmn:collaboration id="Collaboration_1u0tsgp">
   <bpmn:participant id="Participant_OfficeAssistant" name="Participant 1" />
 </bpmn:collaboration>
-        `)
+          `,
+          false
+        )
       ),
     },
   ],

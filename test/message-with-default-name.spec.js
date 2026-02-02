@@ -18,9 +18,12 @@ verifyRule(__filename, {
     {
       name: 'Process with valid message name',
       moddleElement: createModdle(
-        generateFragment(`
+        generateFragment(
+          `
 <bpmn:message id="Message_2ajovd3" name="MessageBoundaryEvent" />
-        `)
+          `,
+          false
+        )
       ),
     },
   ],
