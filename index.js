@@ -30,6 +30,8 @@ let bpmnlintRulesConfig = {
     all: { rules: {} },
     recommended: { rules: {} },
     strict: { rules: {} },
+    'camunda-8-7': { rules: {} },
+    'camunda-8-8': { rules: {} },
   },
   rules: {},
 };
@@ -51,7 +53,11 @@ function addRule(ruleName, severity) {
     if (rulesetSeverities[ruleset] === 'off') return;
 
     const prefixedRuleName = prefix ? `${prefix}/${ruleName}` : ruleName;
-    bpmnlintRulesConfig.configs[ruleset].rules[prefixedRuleName] = rulesetSeverities[ruleset];
+
+    // If the config exists, add the rule
+    if (bpmnlintRulesConfig.configs[ruleset]) {
+      bpmnlintRulesConfig.configs[ruleset].rules[prefixedRuleName] = rulesetSeverities[ruleset];
+    }
   });
 }
 
@@ -76,5 +82,15 @@ addRule('signal-with-default-name', { recommended: 'info', strict: 'warn' });
 addRule('subprocess-with-default-id', { recommended: 'info', strict: 'warn' });
 addRule('user-task-without-assignment-details', { recommended: 'warn', strict: 'error' });
 addRule('variable-name-with-invalid-character', { recommended: 'warn', strict: 'error' });
+
+const versionedConfigs = ['camunda-8-7', 'camunda-8-8'];
+const recommendedRules = bpmnlintRulesConfig.configs.recommended.rules;
+
+versionedConfigs.forEach(version => {
+  bpmnlintRulesConfig.configs[version].rules = {
+    ...recommendedRules,
+    ...bpmnlintRulesConfig.configs[version].rules
+  };
+});
 
 module.exports = bpmnlintRulesConfig;
