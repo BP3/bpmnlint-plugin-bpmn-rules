@@ -86,10 +86,10 @@ addRule('variable-name-with-invalid-character', { recommended: 'warn', strict: '
 const versionedConfigs = ['camunda-8-7', 'camunda-8-8'];
 const recommendedRules = bpmnlintRulesConfig.configs.recommended.rules;
 
-versionedConfigs.forEach(version => {
+versionedConfigs.forEach((version) => {
   bpmnlintRulesConfig.configs[version].rules = {
     ...recommendedRules,
-    ...bpmnlintRulesConfig.configs[version].rules
+    ...bpmnlintRulesConfig.configs[version].rules,
   };
 });
 
