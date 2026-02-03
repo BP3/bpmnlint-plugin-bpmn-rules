@@ -19,7 +19,7 @@ verifyRule(__filename, {
       name: 'Process with valid activity id',
       moddleElement: createModdle(
         generateFragment(`
-          <bpmn:task id="ReviewRequestTask" name="Review Request" />
+<bpmn:task id="ReviewRequestTask" name="Review Request" />
         `)
       ),
     },
@@ -29,9 +29,7 @@ verifyRule(__filename, {
       name: 'Process with default activity id',
       moddleElement: createModdle(
         generateFragment(`
-<bpmn:process id="Process_378ti4z">
-  <bpmn:task id="Activity_1w64wtr" name="Review Request" />
-</bpmn:process>
+<bpmn:task id="Activity_1w64wtr" name="Review Request" />
         `)
       ),
       report: [

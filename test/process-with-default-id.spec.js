@@ -18,10 +18,12 @@ verifyRule(__filename, {
     {
       name: 'Process with valid process id',
       moddleElement: createModdle(
-        generateFragment(`
-<bpmn:process id="ReviewRequest_Process">
-</bpmn:process>
-        `)
+        generateFragment(
+          `
+<bpmn:process id="ReviewRequest_Process" />
+          `,
+          false
+        )
       ),
     },
   ],
@@ -29,10 +31,12 @@ verifyRule(__filename, {
     {
       name: 'Process with default process id',
       moddleElement: createModdle(
-        generateFragment(`
-<bpmn:process id="Process_1s1qrpb">
-</bpmn:process>
-        `)
+        generateFragment(
+          `
+<bpmn:process id="Process_1s1qrpb" />
+        `,
+          false
+        )
       ),
       report: [
         {
