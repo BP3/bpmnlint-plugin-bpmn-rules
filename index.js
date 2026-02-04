@@ -95,7 +95,7 @@ ruleArrays['camunda-8-7'] = [
   { name: 'no-job-worker-user-task-implementation-type', severity: 'error' },
 ];
 
-ruleArrays['camunda-8-8'] = [...ruleArrays['camunda-8-7']];
+ruleArrays['camunda-8-8'] = [...ruleArrays['camunda-8-7'].filter((rule) => rule.name !== 'user-task-without-assignment-details'), { name: 'user-task-without-assignment-details', severity: 'error' }];
 
 // Conversion Loop
 Object.keys(ruleArrays).forEach((ruleSet) => {
