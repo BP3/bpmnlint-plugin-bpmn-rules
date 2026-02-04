@@ -19,10 +19,8 @@ verifyRule(__filename, {
       name: 'Process with valid sub-process id',
       moddleElement: createModdle(
         generateFragment(`
-<bpmn:process id="Process_1ptltre">
-  <bpmn:subProcess id="EmbeddedSubprocess">
-  </bpmn:subProcess>
-</bpmn:process>
+<bpmn:subProcess id="EmbeddedSubprocess">
+</bpmn:subProcess>
         `)
       ),
     },
@@ -32,10 +30,8 @@ verifyRule(__filename, {
       name: 'Process with default sub-process id',
       moddleElement: createModdle(
         generateFragment(`
-<bpmn:process id="Process_1ptltre">
-  <bpmn:subProcess id="Activity_07xqy0u">
-  </bpmn:subProcess>
-</bpmn:process>
+<bpmn:subProcess id="Activity_07xqy0u">
+</bpmn:subProcess>
         `)
       ),
       report: [
