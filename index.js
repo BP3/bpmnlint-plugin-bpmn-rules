@@ -108,10 +108,7 @@ Object.keys(ruleArrays).forEach((ruleSet) => {
     const rule = ruleArrays[ruleSet][idx];
     const prefixedRuleName = prefix ? `${prefix}/${rule.name}` : rule.name;
 
-    bpmnlintRulesConfig.configs[ruleSet].rules[prefixedRuleName] = [
-      rule.severity,
-      { version: ruleSet }
-    ];
+    bpmnlintRulesConfig.configs[ruleSet].rules[prefixedRuleName] = [rule.severity, { version: ruleSet }];
   }
 });
 
