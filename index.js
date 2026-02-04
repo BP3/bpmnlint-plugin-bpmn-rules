@@ -30,11 +30,11 @@ let bpmnlintRulesConfig = {
     all: { rules: {} },
     recommended: { rules: {} },
     strict: { rules: {} },
-    'camunda-8-7': { rules: {} },
-    'camunda-8-8': { rules: {} },
   },
   rules: {},
 };
+
+let ruleArrays = {};
 
 function addRule(ruleName, severity) {
   const ruleFile = getRulePath(rulesPath, ruleName);
@@ -49,6 +49,8 @@ function addRule(ruleName, severity) {
   const rulesetSeverities = { all: allSeverity, ...severity };
 
   Object.keys(rulesetSeverities).forEach((ruleset) => {
+    ruleArrays[ruleset] = ruleArrays[ruleset] || [];
+    ruleArrays[ruleset].push({ name: ruleName, severity: rulesetSeverities[ruleset] });
     // skip if severity is off
     if (rulesetSeverities[ruleset] === 'off') return;
 
@@ -83,14 +85,31 @@ addRule('subprocess-with-default-id', { recommended: 'info', strict: 'warn' });
 addRule('user-task-without-assignment-details', { recommended: 'warn', strict: 'error' });
 addRule('variable-name-with-invalid-character', { recommended: 'warn', strict: 'error' });
 
-const versionedConfigs = ['camunda-8-7', 'camunda-8-8'];
-const recommendedRules = bpmnlintRulesConfig.configs.recommended.rules;
+ruleArrays['camunda-8-6'] = [
+  ...ruleArrays.recommended.filter((rule) => rule.name !== 'no-job-worker-user-task-implementation-type'),
+  { name: 'no-job-worker-user-task-implementation-type', severity: 'off' },
+];
 
-versionedConfigs.forEach((version) => {
-  bpmnlintRulesConfig.configs[version].rules = {
-    ...recommendedRules,
-    ...bpmnlintRulesConfig.configs[version].rules,
-  };
+ruleArrays['camunda-8-7'] = [
+  ...ruleArrays['camunda-8-6'].filter((rule) => rule.name !== 'no-job-worker-user-task-implementation-type'),
+  { name: 'no-job-worker-user-task-implementation-type', severity: 'error' },
+];
+
+ruleArrays['camunda-8-8'] = [...ruleArrays['camunda-8-7']];
+
+// Conversion Loop
+Object.keys(ruleArrays).forEach((ruleSet) => {
+  // Ensure the config object exists
+  if (!bpmnlintRulesConfig.configs[ruleSet]) {
+    bpmnlintRulesConfig.configs[ruleSet] = { rules: {} };
+  }
+
+  for (var idx = 0; idx < ruleArrays[ruleSet].length; ++idx) {
+    const rule = ruleArrays[ruleSet][idx];
+    const prefixedRuleName = prefix ? `${prefix}/${rule.name}` : rule.name;
+
+    bpmnlintRulesConfig.configs[ruleSet].rules[prefixedRuleName] = [rule.severity, { version: ruleSet }];
+  }
 });
 
 module.exports = bpmnlintRulesConfig;
