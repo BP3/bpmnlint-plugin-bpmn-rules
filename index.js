@@ -87,7 +87,7 @@ addRule('variable-name-with-invalid-character', { recommended: 'warn', strict: '
 
 ruleArrays['camunda-8-6'] = [
   ...ruleArrays.recommended.filter((rule) => rule.name !== 'no-job-worker-user-task-implementation-type'),
-  { name: 'no-job-worker-user-task-implementation-type', severity: 'off' },
+  { name: 'no-job-worker-user-task-implementation-type', severity: 'warn' },
 ];
 
 ruleArrays['camunda-8-7'] = [
@@ -95,7 +95,7 @@ ruleArrays['camunda-8-7'] = [
   { name: 'no-job-worker-user-task-implementation-type', severity: 'error' },
 ];
 
-ruleArrays['camunda-8-8'] = [...ruleArrays['camunda-8-7'].filter((rule) => rule.name !== 'user-task-without-assignment-details'), { name: 'user-task-without-assignment-details', severity: 'error' }];
+ruleArrays['camunda-8-8'] = [...ruleArrays['camunda-8-7'].filter((rule) => rule.name !== 'user-task-without-assignment-details'), { name: 'user-task-without-assignment-details', severity: 'off' }];
 
 // Conversion Loop
 Object.keys(ruleArrays).forEach((ruleSet) => {
@@ -108,7 +108,10 @@ Object.keys(ruleArrays).forEach((ruleSet) => {
     const rule = ruleArrays[ruleSet][idx];
     const prefixedRuleName = prefix ? `${prefix}/${rule.name}` : rule.name;
 
-    bpmnlintRulesConfig.configs[ruleSet].rules[prefixedRuleName] = [rule.severity, { version: ruleSet }];
+    bpmnlintRulesConfig.configs[ruleSet].rules[prefixedRuleName] = [
+      rule.severity,
+      { version: ruleSet }
+    ];
   }
 });
 
