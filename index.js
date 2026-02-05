@@ -51,18 +51,10 @@ function addRule(ruleName, severity) {
   Object.keys(rulesetSeverities).forEach((ruleset) => {
     ruleArrays[ruleset] = ruleArrays[ruleset] || [];
     ruleArrays[ruleset].push({ name: ruleName, severity: rulesetSeverities[ruleset] });
-    // skip if severity is off
-    if (rulesetSeverities[ruleset] === 'off') return;
-
-    const prefixedRuleName = prefix ? `${prefix}/${ruleName}` : ruleName;
-
-    // If the config exists, add the rule
-    if (bpmnlintRulesConfig.configs[ruleset]) {
-      bpmnlintRulesConfig.configs[ruleset].rules[prefixedRuleName] = rulesetSeverities[ruleset];
-    }
   });
 }
 
+// baseline severities
 addRule('activity-with-default-id', { recommended: 'warn', strict: 'error' });
 addRule('activity-without-type', { recommended: 'info', strict: 'info' });
 addRule('artifact-with-default-id', { recommended: 'off', strict: 'off' });
@@ -106,6 +98,7 @@ Object.keys(ruleArrays).forEach((ruleSet) => {
 
   for (var idx = 0; idx < ruleArrays[ruleSet].length; ++idx) {
     const rule = ruleArrays[ruleSet][idx];
+    if (rule.severity === 'off') continue;
     const prefixedRuleName = prefix ? `${prefix}/${rule.name}` : rule.name;
 
     bpmnlintRulesConfig.configs[ruleSet].rules[prefixedRuleName] = [rule.severity, { version: ruleSet }];
