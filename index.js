@@ -45,8 +45,7 @@ function addRule(ruleName, severity) {
 
   bpmnlintRulesConfig.rules[ruleName] = ruleFile;
 
-  const allSeverity = severity.all ?? 'info';
-  const rulesetSeverities = { all: allSeverity, ...severity };
+  const rulesetSeverities = { all: severity.all ?? 'info', ...severity };
 
   Object.keys(rulesetSeverities).forEach((ruleset) => {
     ruleArrays[ruleset] = ruleArrays[ruleset] || [];
@@ -125,13 +124,10 @@ Object.keys(ruleArrays).forEach((ruleSet) => {
     bpmnlintRulesConfig.configs[ruleSet] = { rules: {} };
   }
 
-  for (var idx = 0; idx < ruleArrays[ruleSet].length; ++idx) {
-    const rule = ruleArrays[ruleSet][idx];
-    if (rule.severity === 'off') continue;
+  ruleArrays[ruleSet].forEach((rule) => {
     const prefixedRuleName = prefix ? `${prefix}/${rule.name}` : rule.name;
-
     bpmnlintRulesConfig.configs[ruleSet].rules[prefixedRuleName] = [rule.severity, { version: ruleSet }];
-  }
+  });
 });
 
 module.exports = bpmnlintRulesConfig;
