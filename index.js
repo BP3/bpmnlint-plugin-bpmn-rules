@@ -30,6 +30,8 @@ let bpmnlintRulesConfig = {
     all: { rules: {} },
     recommended: { rules: {} },
     strict: { rules: {} },
+    'recommended-base': { rules: {} },
+    'strict-base': { rules: {} },
   },
   rules: {},
 };
@@ -54,36 +56,36 @@ function addRule(ruleName, severity) {
 }
 
 // baseline severities
-addRule('activity-with-default-id', { recommended: 'warn', strict: 'error' });
-addRule('activity-without-type', { recommended: 'info', strict: 'info' });
-addRule('artifact-with-default-id', { recommended: 'off', strict: 'off' });
-addRule('event-with-default-id', { recommended: 'info', strict: 'warn' });
-addRule('error-with-default-name', { recommended: 'warn', strict: 'error' });
-addRule('escalation-with-default-name', { recommended: 'info', strict: 'warn' });
-addRule('exclusive-gateway-has-default-flow', { recommended: 'info', strict: 'warn' });
-addRule('inclusive-gateway-has-default-flow', { recommended: 'info', strict: 'warn' });
-addRule('gateway-with-default-id', { recommended: 'info', strict: 'warn' });
-addRule('lane-with-default-id', { recommended: 'off', strict: 'info' });
-addRule('message-flow-with-default-id', { recommended: 'info', strict: 'info' });
-addRule('message-with-default-name', { recommended: 'warn', strict: 'error' });
-addRule('no-job-worker-user-task-implementation-type', { recommended: 'off', strict: 'off' });
-addRule('participant-with-default-id', { recommended: 'off', strict: 'info' });
-addRule('process-with-default-id', { recommended: 'error', strict: 'error' });
-addRule('process-with-empty-name', { recommended: 'info', strict: 'error' });
-addRule('sequence-flow-with-default-id', { recommended: 'off', strict: 'info' });
-addRule('signal-with-default-name', { recommended: 'info', strict: 'warn' });
-addRule('subprocess-with-default-id', { recommended: 'info', strict: 'warn' });
-addRule('user-task-without-assignment-details', { recommended: 'warn', strict: 'error' });
-addRule('variable-name-with-invalid-character', { recommended: 'warn', strict: 'error' });
+addRule('activity-with-default-id', { 'recommended-base': 'warn', 'strict-base': 'error' });
+addRule('activity-without-type', { 'recommended-base': 'info', 'strict-base': 'info' });
+addRule('artifact-with-default-id', { 'recommended-base': 'off', 'strict-base': 'off' });
+addRule('event-with-default-id', { 'recommended-base': 'info', 'strict-base': 'warn' });
+addRule('error-with-default-name', { 'recommended-base': 'warn', 'strict-base': 'error' });
+addRule('escalation-with-default-name', { 'recommended-base': 'info', 'strict-base': 'warn' });
+addRule('exclusive-gateway-has-default-flow', { 'recommended-base': 'info', 'strict-base': 'warn' });
+addRule('inclusive-gateway-has-default-flow', { 'recommended-base': 'info', 'strict-base': 'warn' });
+addRule('gateway-with-default-id', { 'recommended-base': 'info', 'strict-base': 'warn' });
+addRule('lane-with-default-id', { 'recommended-base': 'off', 'strict-base': 'info' });
+addRule('message-flow-with-default-id', { 'recommended-base': 'info', 'strict-base': 'info' });
+addRule('message-with-default-name', { 'recommended-base': 'warn', 'strict-base': 'error' });
+addRule('no-job-worker-user-task-implementation-type', { 'recommended-base': 'off', 'strict-base': 'off' });
+addRule('participant-with-default-id', { 'recommended-base': 'off', 'strict-base': 'info' });
+addRule('process-with-default-id', { 'recommended-base': 'error', 'strict-base': 'error' });
+addRule('process-with-empty-name', { 'recommended-base': 'info', 'strict-base': 'error' });
+addRule('sequence-flow-with-default-id', { 'recommended-base': 'off', 'strict-base': 'info' });
+addRule('signal-with-default-name', { 'recommended-base': 'info', 'strict-base': 'warn' });
+addRule('subprocess-with-default-id', { 'recommended-base': 'info', 'strict-base': 'warn' });
+addRule('user-task-without-assignment-details', { 'recommended-base': 'warn', 'strict-base': 'error' });
+addRule('variable-name-with-invalid-character', { 'recommended-base': 'warn', 'strict-base': 'error' });
 
 // Version Specific RECOMMENDED
 ruleArrays['camunda-8-5-recommended'] = [
-  ...ruleArrays.recommended.filter((r) => r.name !== 'no-job-worker-user-task-implementation-type'),
+  ...ruleArrays['recommended-base'].filter((rule) => rule.name !== 'no-job-worker-user-task-implementation-type'),
   { name: 'no-job-worker-user-task-implementation-type', severity: 'info' },
 ];
 
 ruleArrays['camunda-8-6-recommended'] = [
-  ...ruleArrays.recommended.filter((rule) => rule.name !== 'no-job-worker-user-task-implementation-type'),
+  ...ruleArrays['camunda-8-5-recommended'].filter((rule) => rule.name !== 'no-job-worker-user-task-implementation-type'),
   { name: 'no-job-worker-user-task-implementation-type', severity: 'warn' },
 ];
 
@@ -99,12 +101,12 @@ ruleArrays['camunda-8-8-recommended'] = [
 
 // 3. Version Specific STRICT
 ruleArrays['camunda-8-5-strict'] = [
-  ...ruleArrays.strict.filter((r) => r.name !== 'no-job-worker-user-task-implementation-type'),
+  ...ruleArrays['strict-base'].filter((rule) => rule.name !== 'no-job-worker-user-task-implementation-type'),
   { name: 'no-job-worker-user-task-implementation-type', severity: 'info' },
 ];
 
 ruleArrays['camunda-8-6-strict'] = [
-  ...ruleArrays.strict.filter((rule) => rule.name !== 'no-job-worker-user-task-implementation-type'),
+  ...ruleArrays['camunda-8-5-strict'].filter((rule) => rule.name !== 'no-job-worker-user-task-implementation-type'),
   { name: 'no-job-worker-user-task-implementation-type', severity: 'warn' },
 ];
 
@@ -117,6 +119,10 @@ ruleArrays['camunda-8-8-strict'] = [
   ...ruleArrays['camunda-8-7-strict'].filter((rule) => rule.name !== 'user-task-without-assignment-details'),
   { name: 'user-task-without-assignment-details', severity: 'off' },
 ];
+
+// Update to the latest version
+ruleArrays['recommended'] = ruleArrays['camunda-8-8-recommended'];
+ruleArrays['strict'] = ruleArrays['camunda-8-8-strict'];
 
 // Conversion Loop
 Object.keys(ruleArrays).forEach((ruleSet) => {
