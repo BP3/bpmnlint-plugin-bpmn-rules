@@ -120,14 +120,13 @@ ruleArrays['camunda-8-8-strict'] = [
 
 // Conversion Loop
 Object.keys(ruleArrays).forEach((ruleSet) => {
-  if (!bpmnlintRulesConfig.configs[ruleSet]) {
-    bpmnlintRulesConfig.configs[ruleSet] = { rules: {} };
-  }
+  bpmnlintRulesConfig.configs[ruleSet] = bpmnlintRulesConfig.configs[ruleSet] || { rules: {} };
 
-  ruleArrays[ruleSet].forEach((rule) => {
+  for (var idx = 0; idx < ruleArrays[ruleSet].length; ++idx) {
+    const rule = ruleArrays[ruleSet][idx];
     const prefixedRuleName = prefix ? `${prefix}/${rule.name}` : rule.name;
-    bpmnlintRulesConfig.configs[ruleSet].rules[prefixedRuleName] = [rule.severity, { version: ruleSet }];
-  });
+    bpmnlintRulesConfig.configs[ruleSet].rules[prefixedRuleName] = rule.severity;
+  }
 });
 
 module.exports = bpmnlintRulesConfig;
