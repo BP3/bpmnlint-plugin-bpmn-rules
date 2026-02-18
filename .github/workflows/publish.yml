@@ -25,18 +25,12 @@ jobs:
   
     - name: Install dependencies
       run: npm install
-
-    - name: Install jq
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y jq
     
     - name: Set package version
-      run: |
-        VERSION=${GITHUB_REF_NAME}
+      run: npm pkg set version=${GITHUB_REF_NAME}
 
-        jq ".version = \"$VERSION\"" package.json > package.json.new
-        mv package.json.new package.json
+    - name: Remove devDependencies
+      run: npm pkg delete devDependencies
 
     - name: Publish to GitHub Packages
       run: npm publish --registry=https://npm.pkg.github.com
