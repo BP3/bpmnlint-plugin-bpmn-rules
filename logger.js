@@ -12,7 +12,7 @@
  =
  =================================================================================*/
 
-const chalk = require('chalk').default;
+const chalk = require('chalk');
 
 const logger = {
   log: (...args) => {
