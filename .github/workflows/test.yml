@@ -36,4 +36,9 @@ jobs:
       run: | 
         npm install bpmnlint
         npx bpmnlint --config=test/smoke-test/.bpmnlintrc test/smoke-test/*.bpmn | tee command_output.log
-        grep -F "(0 errors," command_output.log
+        if grep -q -F "(0 errors," command_output.log; then
+          echo "Pass"
+        else
+          echo "::error::Fail"
+          exit 1
+        fi
