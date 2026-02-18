@@ -1,0 +1,3 @@
+{
+  "extends": ["plugin:@BP3/bpmnlint-plugin-bpmn-rules/recommended"]
+}
