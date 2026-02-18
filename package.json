@@ -3,6 +3,13 @@
   "version": "set-by-pipeline-on-release",
   "description": "BP3's rules to extend Camunda's core set (see bpmnlint)",
   "main": "index.js",
+  "files": [
+    "rules",
+    "index.js",
+    "logger.js",
+    "README.md",
+    "LICENSE"
+  ],
   "keywords": [
     "bpmnlint",
     "bpmn",
