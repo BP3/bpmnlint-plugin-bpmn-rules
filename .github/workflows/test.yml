@@ -33,6 +33,5 @@ jobs:
       run: | 
         npm test
         npm install bpmnlint
-        cd test/smoke-test
-        npx bpmnlint *.bpmn | tee command_output.log
+        npx bpmnlint --config=test/smoke-test/.bpmnlintrc test/smoke-test/*.bpmn | tee command_output.log
         grep -F "(0 errors," command_output.log
