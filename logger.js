@@ -12,22 +12,23 @@
  =
  =================================================================================*/
 
+const process = require('process');
 const chalk = require('chalk').default;
 
 const logger = {
-  log: (...args) => {
-    if (argv.verbose) {
-      console.log(chalk.gray('VERBOSE:'), ...args);
+  debug: (...args) => {
+    if (process.env.VERBOSE != null && process.env.VERBOSE.toLowerCase() == 'true') {
+      console.log(chalk.gray('DEBUG:'), ...args);
     }
   },
   info: (...args) => {
-    console.log(chalk.bold(chalk.blueBright('INFO:')), ...args);
+    console.log(chalk.blueBright.bold('INFO:'), ...args);
   },
   warn: (...args) => {
-    console.warn(chalk.bold(chalk.yellowBright('WARN:')), ...args);
+    console.warn(chalk.yellowBright.bold('WARN:'), ...args);
   },
   error: (...args) => {
-    console.error(chalk.bold(chalk.redBright('ERROR:')), ...args);
+    console.error(chalk.redBright.bold('ERROR:'), ...args);
   },
 };
 
