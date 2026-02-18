@@ -30,4 +30,8 @@ jobs:
       run: npm run lint
 
     - name: Run tests
-      run: npm test
+      run: | 
+        npm test
+        npm install bpmnlint
+        npx bpmnlint ./test/smoke-test/*.bpmn | tee command_output.log
+        grep -F "(0 errors," command_output.log
