@@ -16,15 +16,11 @@ const path = require('path');
 
 // Get the prefix for this plugin from the package.json if it's set
 const { name } = require('./package.json');
+
+logger.debug(`${name}: Initializing constants and variables`);
 const prefix = name.trim();
-
 const rulesPath = './rules';
-
-// helper to prepare the rules path for the plugin
-function getRulePath(basePath, ruleName) {
-  return basePath?.trim() ? `${basePath}/${ruleName}` : ruleName;
-}
-
+let ruleArrays = {};
 let bpmnlintRulesConfig = {
   configs: {
     all: { rules: {} },
@@ -36,7 +32,11 @@ let bpmnlintRulesConfig = {
   rules: {},
 };
 
-let ruleArrays = {};
+logger.debug(`${name}: Declaring helper functions`);
+// helper to prepare the rules path for the plugin
+function getRulePath(basePath, ruleName) {
+  return basePath?.trim() ? `${basePath}/${ruleName}` : ruleName;
+}
 
 function addRule(ruleName, severity) {
   const ruleFile = getRulePath(rulesPath, ruleName);
@@ -55,6 +55,7 @@ function addRule(ruleName, severity) {
   });
 }
 
+logger.debug(`${name}: Setup baseline rulesets`);
 // baseline severities
 addRule('activity-with-default-id', { 'recommended-base': 'warn', 'strict-base': 'error' });
 addRule('activity-without-type', { 'recommended-base': 'info', 'strict-base': 'info' });
@@ -78,6 +79,7 @@ addRule('subprocess-with-default-id', { 'recommended-base': 'info', 'strict-base
 addRule('user-task-without-assignment-details', { 'recommended-base': 'warn', 'strict-base': 'error' });
 addRule('variable-name-with-invalid-character', { 'recommended-base': 'warn', 'strict-base': 'error' });
 
+logger.debug(`${name}: Setup version specific rulesets`);
 // Version Specific RECOMMENDED
 ruleArrays['camunda-8-5-recommended'] = [
   ...ruleArrays['recommended-base'].filter((rule) => rule.name !== 'no-job-worker-user-task-implementation-type'),
@@ -120,10 +122,12 @@ ruleArrays['camunda-8-8-strict'] = [
   { name: 'user-task-without-assignment-details', severity: 'off' },
 ];
 
+logger.debug(`${name}: Setup the latest stable rulesets (recommended + strict)`);
 // Update to the latest version
 ruleArrays['recommended'] = ruleArrays['camunda-8-8-recommended'];
 ruleArrays['strict'] = ruleArrays['camunda-8-8-strict'];
 
+logger.debug(`${name}: Export for the linter`);
 // Conversion Loop
 Object.keys(ruleArrays).forEach((ruleSet) => {
   bpmnlintRulesConfig.configs[ruleSet] = bpmnlintRulesConfig.configs[ruleSet] || { rules: {} };

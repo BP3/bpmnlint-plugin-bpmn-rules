@@ -1,5 +1,5 @@
 {
-  "name": "@bp3/bpmnlint-plugin-bpmn-rules",
+  "name": "@BP3/bpmnlint-plugin-bpmn-rules",
   "version": "set-by-pipeline-on-release",
   "description": "BP3's rules to extend Camunda's core set (see bpmnlint)",
   "main": "index.js",
@@ -41,7 +41,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "globals": "^17.0.0",
-    "mocha": "^11.1.0",
+    "mocha": "^11.4.0",
     "prettier": "3.7.4"
   }
 }
