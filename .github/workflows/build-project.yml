@@ -53,6 +53,11 @@ jobs:
   integration-test:
     name: Integration Test
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false # Don't stop other versions if one fails
+      matrix:
+        # Define your array of versions here
+        bpmnlint-version: ['11.12.0', '11.10.0', '10.3.0']
 
     steps:
     - name: Checkout code
@@ -67,39 +72,16 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run integration tests (bpmnlint - current version)
+    - name: Run integration test
       run: | 
-        npm install bpmnlint
+        echo "Testing with bpmnlint version: ${{ matrix.bpmnlint-version }}"
+        npm install bpmnlint@${{ matrix.bpmnlint-version }} &> /dev/null
         npm list bpmnlint
         npx bpmnlint --config=test/smoke-test/.bpmnlintrc test/smoke-test/*.bpmn | tee command_output.log
         if grep -q -F "(0 errors," command_output.log; then
-          echo "Pass"
+          echo "Pass: ${{ matrix.bpmnlint-version }}"
         else
-          echo "::error::Fail"
-          exit 1
-        fi
-
-    - name: Run integration tests (bpmnlint v11.10.0)
-      run: | 
-        npm install bpmnlint@11.10.0
-        npm list bpmnlint
-        npx bpmnlint --config=test/smoke-test/.bpmnlintrc test/smoke-test/*.bpmn | tee command_output.log
-        if grep -q -F "(0 errors," command_output.log; then
-          echo "Pass"
-        else
-          echo "::error::Fail"
-          exit 1
-        fi
-
-    - name: Run integration tests (bpmnlint v11.7.3)
-      run: | 
-        npm install bpmnlint@11.7.3
-        npm list bpmnlint
-        npx bpmnlint --config=test/smoke-test/.bpmnlintrc test/smoke-test/*.bpmn | tee command_output.log
-        if grep -q -F "(0 errors," command_output.log; then
-          echo "Pass"
-        else
-          echo "::error::Fail"
+          echo "::error::Fail: ${{ matrix.bpmnlint-version }}"
           exit 1
         fi
 
