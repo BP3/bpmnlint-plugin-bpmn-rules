@@ -19,7 +19,7 @@ const { name } = require('./package.json');
 
 logger.debug(`${name}: Initializing constants and variables`);
 const prefix = name.trim();
-const rulesPath = './rules';
+const rulesPath = path.join(__dirname, 'rules');
 let ruleArrays = {};
 let bpmnlintRulesConfig = {
   configs: {
