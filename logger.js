@@ -12,8 +12,8 @@
  =
  =================================================================================*/
 
+const chalk = require('chalk');
 const process = require('process');
-const chalk = require('chalk').default;
 
 const logger = {
   debug: (...args) => {
