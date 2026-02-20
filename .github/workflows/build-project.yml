@@ -67,9 +67,10 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run integration tests
+    - name: Run integration tests (bpmnlint - current version)
       run: | 
         npm install bpmnlint
+        npm list bpmnlint
         npx bpmnlint --config=test/smoke-test/.bpmnlintrc test/smoke-test/*.bpmn | tee command_output.log
         if grep -q -F "(0 errors," command_output.log; then
           echo "Pass"
@@ -77,3 +78,47 @@ jobs:
           echo "::error::Fail"
           exit 1
         fi
+
+    - name: Run integration tests (bpmnlint v11.10.0)
+      run: | 
+        npm install bpmnlint@11.10.0
+        npm list bpmnlint
+        npx bpmnlint --config=test/smoke-test/.bpmnlintrc test/smoke-test/*.bpmn | tee command_output.log
+        if grep -q -F "(0 errors," command_output.log; then
+          echo "Pass"
+        else
+          echo "::error::Fail"
+          exit 1
+        fi
+
+    - name: Run integration tests (bpmnlint v11.7.3)
+      run: | 
+        npm install bpmnlint@11.7.3
+        npm list bpmnlint
+        npx bpmnlint --config=test/smoke-test/.bpmnlintrc test/smoke-test/*.bpmn | tee command_output.log
+        if grep -q -F "(0 errors," command_output.log; then
+          echo "Pass"
+        else
+          echo "::error::Fail"
+          exit 1
+        fi
+
+  npm-audit-check:
+    name: NPM Audit Check
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run the audit
+      run: npm audit --omit=dev
