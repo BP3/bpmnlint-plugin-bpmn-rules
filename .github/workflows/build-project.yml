@@ -53,6 +53,22 @@ jobs:
   integration-test:
     name: Integration Test
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false # Don't stop other versions if one fails
+      matrix:
+        # Define your array of versions here
+        bpmnlint-version: [
+          '11.0.0', 
+          '11.1.0', 
+          '11.4.4', 
+          '11.5.0', 
+          '11.6.1', 
+          '11.7.3', 
+          '11.8.0', 
+          '11.9.0', 
+          '11.10.0', 
+          '11.11.0'
+        ]
 
     steps:
     - name: Checkout code
@@ -67,13 +83,35 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run integration tests
+    - name: Run integration test
       run: | 
-        npm install bpmnlint
+        echo "Testing with bpmnlint version: ${{ matrix.bpmnlint-version }}"
+        npm install bpmnlint@${{ matrix.bpmnlint-version }} &> /dev/null
+        npm list bpmnlint
         npx bpmnlint --config=test/smoke-test/.bpmnlintrc test/smoke-test/*.bpmn | tee command_output.log
         if grep -q -F "(0 errors," command_output.log; then
-          echo "Pass"
+          echo "Pass: ${{ matrix.bpmnlint-version }}"
         else
-          echo "::error::Fail"
+          echo "::error::Fail: ${{ matrix.bpmnlint-version }}"
           exit 1
         fi
+
+  npm-audit-check:
+    name: NPM Audit Check
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run the audit
+      run: npm audit --omit=dev
