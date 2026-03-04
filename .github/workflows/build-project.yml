@@ -77,11 +77,14 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v6
       with:
-        node-version: '>=22.14'
+        node-version-file: 'package.json'
+        node-version: '>=22.14.0'
         cache: 'npm'
 
     - name: Install dependencies
-      run: npm install
+      run: |
+        npm ls
+        npm install
 
     - name: Run integration test
       run: | 
