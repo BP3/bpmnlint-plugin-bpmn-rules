@@ -81,8 +81,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        npm ls
-        npm install
+        npm ci
 
     - name: Run integration test
       run: | 
