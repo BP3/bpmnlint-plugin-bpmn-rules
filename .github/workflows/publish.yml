@@ -17,14 +17,14 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
-        node-version: '22'
+        node-version: '>=22.14.0'
         registry-url: 'https://npm.pkg.github.com'
         scope: '@BP3'
   
     - name: Install dependencies
-      run: npm install
+      run: npm ci
     
     - name: Set package version
       run: npm pkg set version=${GITHUB_REF_NAME}
