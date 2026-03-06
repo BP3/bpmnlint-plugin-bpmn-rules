@@ -30,6 +30,7 @@ function checkRulesWithoutTests() {
   const ruleFiles = fs
     .readdirSync(rulesDir)
     .filter((file) => file.endsWith('.js'))
+    .filter((file) => !file.endsWith('helper.js'))
     .map((file) => file.replace('.js', ''));
 
   // Get all test files
