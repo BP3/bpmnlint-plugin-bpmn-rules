@@ -21,7 +21,7 @@ module.exports = function () {
     if (isAny(node, ['bpmn:Signal'])) {
       //output
       if (isDefaultIdOrName('Signal', node.name)) {
-        reporter.report(node.name, 'Signal has a default name. Please provide a significant name!');
+        reporter.report(node.id, 'Signal has a default name. Please provide a significant name!');
       }
     }
   }

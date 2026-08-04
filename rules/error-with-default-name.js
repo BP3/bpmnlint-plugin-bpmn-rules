@@ -21,7 +21,7 @@ module.exports = function () {
     if (isAny(node, ['bpmn:Error'])) {
       //output
       if (isDefaultIdOrName('Error', node.name)) {
-        reporter.report(node.name, 'Error has a default name. Please provide a significant name!');
+        reporter.report(node.id, 'Error has a default name. Please provide a significant name!');
       }
     }
   }

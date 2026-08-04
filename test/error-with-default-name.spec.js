@@ -40,7 +40,7 @@ verifyRule(__filename, {
       ),
       report: [
         {
-          id: 'Error_16pj7t5',
+          id: 'Error_0fv8vco',
           message: 'Error has a default name. Please provide a significant name!',
         },
       ],

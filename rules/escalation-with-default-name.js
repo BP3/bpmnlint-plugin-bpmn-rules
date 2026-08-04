@@ -21,7 +21,7 @@ module.exports = function () {
     if (isAny(node, ['bpmn:Escalation'])) {
       //output
       if (isDefaultIdOrName('Escalation', node.name)) {
-        reporter.report(node.name, 'Escalation has a default name. Please provide a significant name!');
+        reporter.report(node.id, 'Escalation has a default name. Please provide a significant name!');
       }
     }
   }
