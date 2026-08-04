@@ -10,14 +10,15 @@
  =
  =================================================================================*/
 
+const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 const { logger } = require('../logger');
 
 /**
- * Checks which rules don't have corresponding test files and logs them
+ * Finds rules that don't have a corresponding test file
  */
-function checkRulesWithoutTests() {
+function findRulesWithoutTests() {
   const rulesDir = path.resolve(__dirname, '../rules');
   const testsDir = path.resolve(__dirname, '.');
 
@@ -40,14 +41,18 @@ function checkRulesWithoutTests() {
     .map((file) => file.replace('.spec.js', ''));
 
   // Find rules without tests
-  const rulesWithoutTests = ruleFiles.filter((rule) => !testFiles.includes(rule));
-
-  if (rulesWithoutTests.length > 0) {
-    const message = 'Rules without tests:\n' + rulesWithoutTests.map((rule) => `- ${rule}`).join('\n');
-    logger.warn(message);
-  }
-
-  return rulesWithoutTests;
+  return ruleFiles.filter((rule) => !testFiles.includes(rule));
 }
 
-checkRulesWithoutTests();
+describe('rule test coverage', () => {
+  it('should have a test file for every rule', () => {
+    const rulesWithoutTests = findRulesWithoutTests();
+
+    if (rulesWithoutTests.length > 0) {
+      const message = 'Rules without tests:\n' + rulesWithoutTests.map((rule) => `- ${rule}`).join('\n');
+      logger.warn(message);
+    }
+
+    assert.strictEqual(rulesWithoutTests.length, 0, `The following rules are missing a test file: ${rulesWithoutTests.join(', ')}`);
+  });
+});
