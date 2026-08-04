@@ -10,14 +10,14 @@
  =
  =================================================================================*/
 
-const { is } = require('bpmnlint-utils');
+const { isAny } = require('bpmnlint-utils');
 
 /**
  * Rule that reports whether an activity does not have a type (applies to: Tasks/Activities)
  */
 module.exports = function () {
   function check(node, reporter) {
-    if (is(node, 'bpmn:Activity')) {
+    if (isAny(node, ['bpmn:Activity'])) {
       let isTaskTypeSet = node['$type'] != 'bpmn:Task';
 
       //output

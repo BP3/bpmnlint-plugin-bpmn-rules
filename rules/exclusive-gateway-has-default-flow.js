@@ -10,14 +10,14 @@
  =
  =================================================================================*/
 
-const { is } = require('bpmnlint-utils');
+const { isAny } = require('bpmnlint-utils');
 
 /**
  * Rule that reports whether an exclusive gateway does not have a default sequence flow (applies to: Gateway)
  */
 module.exports = function () {
   function check(node, reporter) {
-    if (is(node, 'bpmn:ExclusiveGateway')) {
+    if (isAny(node, ['bpmn:ExclusiveGateway'])) {
       let hasDefaultFlow = !!node.default || (node.outgoing || []).length <= 1;
 
       //output

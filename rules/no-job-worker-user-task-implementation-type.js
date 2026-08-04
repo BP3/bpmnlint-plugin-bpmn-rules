@@ -10,14 +10,14 @@
  =
  =================================================================================*/
 
-const { is } = require('bpmnlint-utils');
+const { is, isAny } = require('bpmnlint-utils');
 
 /**
  * Rule that reports whether user tasks are job workers.
  */
 module.exports = function () {
   function check(node, reporter) {
-    if (!is(node, 'bpmn:UserTask')) {
+    if (!isAny(node, ['bpmn:UserTask'])) {
       return;
     }
 
