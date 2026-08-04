@@ -60,8 +60,6 @@ function checkVariableName(name, elementId, reporter, prefix, isNodeUsingConnect
     if (check.regex.test(name)) {
       const prefixString = prefix != null && prefix.length > 0 ? prefix : '';
       reportMessage += ` ${prefixString} variable name '${name}' ${check.message}`;
-      //reporter.report(elementId, `${prefixString} variable name '${name}' ${check.message}`);
-      //return;
     }
   }
   if (reportMessage != null && reportMessage.trim().length > 0) {
