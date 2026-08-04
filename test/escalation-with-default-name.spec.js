@@ -33,7 +33,7 @@ verifyRule(__filename, {
       moddleElement: createModdle(
         generateFragment(
           `
-<bpmn:escalation id="Escalation_0eb1rq6" name="Escalation_0eb1rq6" />
+<bpmn:escalation id="Escalation_0eb1rq6" name="Escalation_1zz9kx2" />
           `,
           false
         )

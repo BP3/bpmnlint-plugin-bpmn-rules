@@ -33,7 +33,7 @@ verifyRule(__filename, {
       moddleElement: createModdle(
         generateFragment(
           `
-<bpmn:signal id="Signal_23t8lvt" name="Signal_23t8lvt" />
+<bpmn:signal id="Signal_23t8lvt" name="Signal_1zz9kx2" />
           `,
           false
         )
