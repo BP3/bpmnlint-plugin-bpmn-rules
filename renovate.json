@@ -1,0 +1,25 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", "schedule:weekly"],
+  "timezone": "Europe/London",
+  "labels": ["dependencies"],
+  "minimumReleaseAge": "3 days",
+  "packageRules": [
+    {
+      "description": "Group lint/format tooling together so it lands as one PR instead of several",
+      "matchPackageNames": ["eslint", "eslint-config-prettier", "eslint-plugin-prettier", "prettier", "@eslint/js", "globals"],
+      "groupName": "lint and format tooling"
+    },
+    {
+      "description": "bpmnlint is the core dependency this plugin extends, and its compatibility is verified by a dedicated version matrix in build-project.yml. Keep updates separate so they get a closer look rather than being grouped or automerged with other tooling.",
+      "matchPackageNames": ["bpmnlint"],
+      "groupName": "bpmnlint (core dependency - check the compatibility matrix)",
+      "labels": ["dependencies", "needs-compatibility-check"]
+    },
+    {
+      "description": "Group GitHub Actions updates together",
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions"
+    }
+  ]
+}
