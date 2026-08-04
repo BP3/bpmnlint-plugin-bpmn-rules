@@ -41,7 +41,7 @@ verifyRule(__filename, {
       report: [
         {
           id: 'Process_1s1qrpb',
-          message: 'Process has a empty name. Please provide a significant name!',
+          message: 'Process has an empty name. Please provide a significant name!',
         },
       ],
     },
