@@ -23,7 +23,7 @@ const LOG_LEVELS = {
 };
 
 function isStringNullOrEmpty(strValue) {
-  return strValue == null || strValue.toLowerCase() == '';
+  return strValue == null || strValue.trim() === '';
 }
 
 function isLogLevelEnabled(logLevel) {
