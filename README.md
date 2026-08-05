@@ -50,7 +50,27 @@ either `info`, `warn` or `error`.
   "rules": {
     "fake-join": "off",
     "label-required": "info",
+    "@BP3/bpmnlint-plugin-bpmn-rules/artifact-with-default-id": "off",
     "@BP3/bpmnlint-plugin-bpmn-rules/user-task-without-assignment-details": "error"
   } 
 }
 ```
+
+> **Important:** `fake-join` and `label-required` above are rules built into `bpmnlint` itself, which is why
+> they can be referenced by their bare name. Every rule from *this* package must always be written with its
+> full package prefix — `@BP3/bpmnlint-plugin-bpmn-rules/<rule-name>` (or the shorthand `@BP3/bpmn-rules/<rule-name>`)
+> — **even though it is already included via `extends`**. If you reference one of this package's rules without
+> the prefix (e.g. `"activity-with-default-id": "error"`), `bpmnlint` will instead look for a core rule with
+> that name and fail with an error such as:
+>
+> ```
+> cannot resolve rule <activity-with-default-id> from <bpmnlint>
+> ```
+>
+> The package scope is also case-sensitive: it must be `@BP3`, not `@bp3`. Getting the case wrong produces
+> the same kind of "cannot resolve rule" error.
+>
+> One thing that makes this easy to miss: `bpmnlint` only tries to resolve rules that are actually enabled,
+> so a misnamed rule set to `off` will *not* raise this error — only a misnamed rule that is `info`, `warn` or
+> `error` will. If you turn one rule off and promote another at the same time, and only the promoted rule
+> fails to resolve, check that the rule you promoted has the full `@BP3/bpmnlint-plugin-bpmn-rules/` prefix.
