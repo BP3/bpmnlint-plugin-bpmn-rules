@@ -78,6 +78,7 @@ addRule('signal-with-default-name', { 'recommended-base': 'info', 'strict-base':
 addRule('subprocess-with-default-id', { 'recommended-base': 'info', 'strict-base': 'warn' });
 addRule('user-task-without-assignment-details', { 'recommended-base': 'warn', 'strict-base': 'error' });
 addRule('variable-name-with-invalid-character', { 'recommended-base': 'warn', 'strict-base': 'error' });
+addRule('version-tag-not-set', { 'recommended-base': 'off', 'strict-base': 'off' });
 
 logger.debug(`${name}: Setup version specific rulesets`);
 // Version Specific RECOMMENDED
