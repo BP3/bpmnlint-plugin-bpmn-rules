@@ -102,6 +102,8 @@ ruleArrays['camunda-8-8-recommended'] = [
   { name: 'user-task-without-assignment-details', severity: 'off' },
 ];
 
+ruleArrays['camunda-8-9-recommended'] = [...ruleArrays['camunda-8-8-recommended']];
+
 // 3. Version Specific STRICT
 ruleArrays['camunda-8-5-strict'] = [
   ...ruleArrays['strict-base'].filter((rule) => rule.name !== 'no-job-worker-user-task-implementation-type'),
@@ -123,10 +125,12 @@ ruleArrays['camunda-8-8-strict'] = [
   { name: 'user-task-without-assignment-details', severity: 'off' },
 ];
 
+ruleArrays['camunda-8-9-strict'] = [...ruleArrays['camunda-8-8-strict']];
+
 logger.debug(`${name}: Setup the latest stable rulesets (recommended + strict)`);
 // Update to the latest version
-ruleArrays['recommended'] = ruleArrays['camunda-8-8-recommended'];
-ruleArrays['strict'] = ruleArrays['camunda-8-8-strict'];
+ruleArrays['recommended'] = ruleArrays['camunda-8-9-recommended'];
+ruleArrays['strict'] = ruleArrays['camunda-8-9-strict'];
 
 logger.debug(`${name}: Export for the linter`);
 // Conversion Loop
