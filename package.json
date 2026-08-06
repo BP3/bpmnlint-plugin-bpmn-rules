@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "bpmnlint-utils": "^1.1.1",
-    "chalk": "^4.1.2"
+    "chalk": "^6.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
