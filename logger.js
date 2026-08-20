@@ -12,7 +12,7 @@
  =
  =================================================================================*/
 
-const chalk = require('chalk');
+const { styleText } = require('node:util');
 const process = require('process');
 
 const LOG_LEVELS = {
@@ -33,25 +33,29 @@ function isLogLevelEnabled(logLevel) {
   );
 }
 
+// Multiple styles are passed to styleText() as an array of formats. This needs
+// Node >= 22.15.0 (see engines in package.json): earlier versions skip the
+// colour-support check for the array form and leak ANSI escape codes into
+// non-TTY output.
 const logger = {
   debug: (...args) => {
     if (isLogLevelEnabled(LOG_LEVELS.debug)) {
-      console.log(chalk.gray('DEBUG:'), ...args);
+      console.log(styleText('gray', 'DEBUG:'), ...args);
     }
   },
   info: (...args) => {
     if (isLogLevelEnabled(LOG_LEVELS.info)) {
-      console.log(chalk.blueBright.bold('INFO:'), ...args);
+      console.log(styleText(['blueBright', 'bold'], 'INFO:'), ...args);
     }
   },
   warn: (...args) => {
     if (isLogLevelEnabled(LOG_LEVELS.warn)) {
-      console.warn(chalk.yellowBright.bold('WARN:'), ...args);
+      console.warn(styleText(['yellowBright', 'bold'], 'WARN:'), ...args);
     }
   },
   error: (...args) => {
     if (isLogLevelEnabled(LOG_LEVELS.error)) {
-      console.error(chalk.redBright.bold('ERROR:'), ...args);
+      console.error(styleText(['redBright', 'bold'], 'ERROR:'), ...args);
     }
   },
 };
