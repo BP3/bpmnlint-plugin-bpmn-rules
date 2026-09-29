@@ -45,6 +45,18 @@ verifyRule(__filename, {
         `)
       ),
     },
+    {
+      name: 'Empty ioMapping with no input/output children does not throw',
+      moddleElement: createModdle(
+        generateFragment(`
+<bpmn:serviceTask id="Task_EmptyIoMapping">
+  <bpmn:extensionElements>
+    <zeebe:ioMapping />
+  </bpmn:extensionElements>
+</bpmn:serviceTask>
+        `)
+      ),
+    },
   ],
   invalid: [
     {

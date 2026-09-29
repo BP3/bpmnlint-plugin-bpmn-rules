@@ -83,7 +83,7 @@ module.exports = function () {
 
       extensionElements.values.forEach((extension) => {
         if (is(extension, 'zeebe:ioMapping')) {
-          extension['$children'].forEach((extensionDefinition) => {
+          (extension['$children'] || []).forEach((extensionDefinition) => {
             if (is(extensionDefinition, 'zeebe:input')) {
               checkVariableName(extensionDefinition.target, node.id, reporter, 'Input', isNodeUsingConnectorTemplate);
             } else if (is(extensionDefinition, 'zeebe:output')) {
