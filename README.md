@@ -12,7 +12,7 @@ npm install @BP3/bpmnlint-plugin-bpmn-rules
 
 ## The rules included in this package
 
-See the [local Wiki](https://github.com/BP3/bpmn-rules/wiki) for a complete description of the rules included in this package.
+See the [local Wiki](https://github.com/BP3/bpmnlint-plugin-bpmn-rules/wiki) for a complete description of the rules included in this package.
 
 ## How to add this rules package to your project
 

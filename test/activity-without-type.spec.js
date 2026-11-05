@@ -35,7 +35,7 @@ verifyRule(__filename, {
       report: [
         {
           id: 'Activity_0mw9waf',
-          message: 'Artifact has no type. Please provide a task type!',
+          message: 'Activity has no type. Please provide a specific task type (e.g. service, user, script)!',
         },
       ],
     },

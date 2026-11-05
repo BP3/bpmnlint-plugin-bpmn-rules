@@ -7,10 +7,10 @@ BP3's bpmnlint plugin: extra lint rules for Camunda 8 BPMN models, published to 
 - `npm test`: runs every spec under `test/`, plus `test/check-coverage.spec.js`.
 - `npm run lint` / `npm run lint:fix`: ESLint with Prettier enforced as an error. Prettier uses `printWidth: 200`, so don't wrap lines early.
 
-No local Node install? Run the same checks in Docker with the `node:24` image, which matches the Node version CI uses:
+No local Node install? Run the same checks in Docker with the `node:26` image. Keep the tag in step with `node-version` in `build-project.yml` (and the allowed command in `.claude/settings.json`) when CI moves to a new Node version:
 
 ```bash
-docker run --rm -v "$PWD":/app -w /app node:24 sh -c "npm ci && npm test && npm run lint"
+docker run --rm -v "$PWD":/app -w /app node:26 sh -c "npm ci && npm test && npm run lint"
 ```
 
 This writes `node_modules/` into the working copy. It's gitignored, and there are no native dependencies, so a Linux-built install is fine on macOS.

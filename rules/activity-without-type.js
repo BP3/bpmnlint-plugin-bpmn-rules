@@ -22,7 +22,7 @@ module.exports = function () {
 
       //output
       if (!isTaskTypeSet) {
-        reporter.report(node.id, 'Artifact has no type. Please provide a task type!');
+        reporter.report(node.id, 'Activity has no type. Please provide a specific task type (e.g. service, user, script)!');
       }
     }
   }
