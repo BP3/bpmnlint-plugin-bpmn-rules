@@ -46,6 +46,22 @@ verifyRule(__filename, {
       ),
     },
     {
+      name: 'Dotted paths to nested variables are allowed without a connector template (Issue #152)',
+      moddleElement: createModdle(
+        generateFragment(`
+<bpmn:callActivity id="CallActivity_GetReferenceData">
+  <bpmn:extensionElements>
+    <zeebe:ioMapping>
+      <zeebe:input source="=application.id" target="request.applicationId" />
+      <zeebe:output source="=reviewerTeam" target="application.cft.cftReviewerTeam" />
+      <zeebe:output source="=details" target="application.otherInfo.bankingOps.detailsOfExistingRelationship" />
+    </zeebe:ioMapping>
+  </bpmn:extensionElements>
+</bpmn:callActivity>
+        `)
+      ),
+    },
+    {
       name: 'Empty ioMapping with no input/output children does not throw',
       moddleElement: createModdle(
         generateFragment(`
@@ -100,7 +116,7 @@ verifyRule(__filename, {
         },
         {
           id: 'Task_MixedErrors',
-          message: "Output variable name 'Output-Variable' must not contain an invalid character (+,-,*,/,=,>,?,.).",
+          message: "Output variable name 'Output-Variable' must not contain an invalid character (+,-,*,/,=,>,?).",
         },
       ],
     },
@@ -128,11 +144,11 @@ verifyRule(__filename, {
       report: [
         {
           id: 'Task_Error',
-          message: "Output variable name 'var=1' must not contain an invalid character (+,-,*,/,=,>,?,.).",
+          message: "Output variable name 'var=1' must not contain an invalid character (+,-,*,/,=,>,?).",
         },
         {
           id: 'Timer_Error',
-          message: "Output variable name 'var?invalid' must not contain an invalid character (+,-,*,/,=,>,?,.).",
+          message: "Output variable name 'var?invalid' must not contain an invalid character (+,-,*,/,=,>,?).",
         },
       ],
     },
@@ -152,6 +168,79 @@ verifyRule(__filename, {
           id: 'Script_Fail',
           message:
             "Script Result variable name '1customer/name*' must not contain an invalid character (+,-,*,/,=,>,?,.). Script Result variable name '1customer/name*' must not start with a number (0-9).",
+        },
+      ],
+    },
+    {
+      name: 'Script Result variable must not contain a period',
+      moddleElement: createModdle(
+        generateFragment(`
+<bpmn:scriptTask id="Script_Dotted">
+  <bpmn:extensionElements>
+    <zeebe:script resultVariable="customer.name" />
+  </bpmn:extensionElements>
+</bpmn:scriptTask>
+        `)
+      ),
+      report: [
+        {
+          id: 'Script_Dotted',
+          message: "Script Result variable name 'customer.name' must not contain an invalid character (+,-,*,/,=,>,?,.).",
+        },
+      ],
+    },
+    {
+      name: 'Dotted path with an invalid character or a number after a period',
+      moddleElement: createModdle(
+        generateFragment(`
+<bpmn:serviceTask id="Task_BadPathParts">
+  <bpmn:extensionElements>
+    <zeebe:ioMapping>
+      <zeebe:input target="request.application-id" />
+      <zeebe:output source="=team" target="application.1team" />
+    </zeebe:ioMapping>
+  </bpmn:extensionElements>
+</bpmn:serviceTask>
+        `)
+      ),
+      report: [
+        {
+          id: 'Task_BadPathParts',
+          message: "Input variable name 'request.application-id' must not contain an invalid character (+,-,*,/,=,>,?).",
+        },
+        {
+          id: 'Task_BadPathParts',
+          message: "Output variable name 'application.1team' must not have a number (0-9) straight after a '.'.",
+        },
+      ],
+    },
+    {
+      name: 'Dotted path with an empty part',
+      moddleElement: createModdle(
+        generateFragment(`
+<bpmn:serviceTask id="Task_EmptyPathParts">
+  <bpmn:extensionElements>
+    <zeebe:ioMapping>
+      <zeebe:output source="=a" target=".team" />
+      <zeebe:output source="=b" target="application." />
+      <zeebe:output source="=c" target="application..team" />
+    </zeebe:ioMapping>
+  </bpmn:extensionElements>
+</bpmn:serviceTask>
+        `)
+      ),
+      report: [
+        {
+          id: 'Task_EmptyPathParts',
+          message: "Output variable name '.team' must not start or end with '.', or contain '..'.",
+        },
+        {
+          id: 'Task_EmptyPathParts',
+          message: "Output variable name 'application.' must not start or end with '.', or contain '..'.",
+        },
+        {
+          id: 'Task_EmptyPathParts',
+          message: "Output variable name 'application..team' must not start or end with '.', or contain '..'.",
         },
       ],
     },
