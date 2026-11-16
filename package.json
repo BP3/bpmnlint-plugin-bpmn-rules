@@ -34,6 +34,9 @@
   "dependencies": {
     "bpmnlint-utils": "^1.1.1"
   },
+  "peerDependencies": {
+    "bpmnlint": "^11.0.0 || ^12.0.0"
+  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "bpmnlint": "^12.0.0",
