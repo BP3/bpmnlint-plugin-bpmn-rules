@@ -38,11 +38,15 @@ Most commits on `main` are Renovate PRs, so `main` moves often. Branch from a fr
 
 ## When bpmnlint is upgraded
 
-`bpmnlint` is the core dependency this plugin extends. Every new version must be added to the `bpmnlint-version` matrix in `.github/workflows/build-project.yml`, so the CI smoke test checks the plugin against it.
+`bpmnlint` is the core dependency this plugin extends. The supported majors are declared in `peerDependencies` in `package.json` (currently `^11.0.0 || ^12.0.0`).
 
-- Renovate opens `bpmnlint` updates as their own PRs (never grouped) with the `needs-compatibility-check` label. Treat that label as a reminder to add the version to the matrix in the same PR, or in a follow-up straight after.
-- Append the version to the end of the list in the same format as the others. Older versions stay in the list.
-- Both 11.14.0 and 11.15.0 were once merged without this step, and the matrix had to be caught up afterwards (#143).
+The `bpmnlint-version` matrix in `.github/workflows/build-project.yml` smoke-tests both ends of each supported major: its first release (`X.0.0`) and its latest release. Intermediate versions aren't tested, because the plugin only uses bpmnlint's plugin API and `bpmnlint-utils`, which stay stable within a major.
+
+- Renovate opens `bpmnlint` updates as their own PRs (never grouped) with the `needs-compatibility-check` label. In that same PR, replace the latest entry for that major in the matrix with the new version. Don't append it.
+- A new bpmnlint major needs a decision before it's merged:
+  - Add both ends of the new major to the matrix (its `X.0.0` and its latest version), and add it to `peerDependencies`.
+  - Decide whether to keep the oldest supported major. Dropping one means removing it from both the matrix and `peerDependencies`, which is a breaking change for users and needs calling out in the release notes.
+- bpmnlint 10.x was checked in November 2026 and passes the smoke test, but it was deliberately left unsupported. It last had a release in September 2024, and the plugin already needs Node 22.15+.
 
 ## Pull requests
 
