@@ -10,14 +10,13 @@
  =
  =================================================================================*/
 
-const { createModdle } = require('bpmnlint/lib/testers/helper');
-const { verifyRule, generateFragment } = require('./helper');
+const { verifyRule, generateFragment, parseBothWays } = require('./helper');
 
 verifyRule(__filename, {
   valid: [
     {
       name: 'UserTask with Zeebe UserTask (valid)',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:userTask id="Activity_ValidUserTask" name="zeebe task">
   <bpmn:extensionElements>
@@ -29,7 +28,7 @@ verifyRule(__filename, {
     },
     {
       name: 'UserTask with a Camunda form',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:userTask id="Activity_0b74psj" name="Do Something">
   <bpmn:extensionElements>
@@ -44,7 +43,7 @@ verifyRule(__filename, {
   invalid: [
     {
       name: 'UserTask with a job worker external form',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:userTask id="Activity_JobWorkerUserTask" name="external form">
   <bpmn:extensionElements>

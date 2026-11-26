@@ -11,6 +11,7 @@
  =================================================================================*/
 
 const { is } = require('bpmnlint-utils');
+const { isZeebe } = require('./helper');
 
 /**
  * Rule that reports whether a user task is missing assignment details
@@ -27,7 +28,7 @@ module.exports = function () {
       //the point is to find the extension that reports that the User Task is not a Job Worker
       node.extensionElements.values.forEach((element) => {
         if (
-          is(element, 'zeebe:assignmentDefinition') &&
+          isZeebe(element, 'zeebe:AssignmentDefinition') &&
           ((element.assignee != null && element.assignee.trim() != '') ||
             (element.candidateGroups != null && element.candidateGroups.trim() != '') ||
             (element.candidateUsers != null && element.candidateUsers.trim() != ''))

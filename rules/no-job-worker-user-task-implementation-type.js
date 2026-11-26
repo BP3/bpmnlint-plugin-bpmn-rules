@@ -11,6 +11,7 @@
  =================================================================================*/
 
 const { is } = require('bpmnlint-utils');
+const { isZeebe } = require('./helper');
 
 /**
  * Rule that reports whether user tasks are job workers.
@@ -26,7 +27,7 @@ module.exports = function () {
     if (node.extensionElements != null && (node.extensionElements.values || []).length > 0) {
       //the point is to find the extension that reports that the User Task is not a Job Worker
       node.extensionElements.values.forEach((element) => {
-        if (is(element, 'zeebe:userTask')) {
+        if (isZeebe(element, 'zeebe:UserTask')) {
           isJobWorker = false;
         }
       });

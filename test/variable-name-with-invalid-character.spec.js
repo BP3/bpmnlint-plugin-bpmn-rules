@@ -10,14 +10,13 @@
  =
  =================================================================================*/
 
-const { createModdle } = require('bpmnlint/lib/testers/helper');
-const { verifyRule, generateFragment } = require('./helper');
+const { verifyRule, generateFragment, parseBothWays } = require('./helper');
 
 verifyRule(__filename, {
   valid: [
     {
       name: 'Standard valid variable names',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:serviceTask id="Task_Valid">
   <bpmn:extensionElements>
@@ -32,7 +31,7 @@ verifyRule(__filename, {
     },
     {
       name: 'Connector templates allow periods',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:serviceTask id="Connector_Task" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2">
   <bpmn:extensionElements>
@@ -47,7 +46,7 @@ verifyRule(__filename, {
     },
     {
       name: 'Dotted paths to nested variables are allowed without a connector template (Issue #152)',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:callActivity id="CallActivity_GetReferenceData">
   <bpmn:extensionElements>
@@ -63,7 +62,7 @@ verifyRule(__filename, {
     },
     {
       name: 'Empty ioMapping with no input/output children does not throw',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:serviceTask id="Task_EmptyIoMapping">
   <bpmn:extensionElements>
@@ -77,7 +76,7 @@ verifyRule(__filename, {
   invalid: [
     {
       name: 'Input starts with a number',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:serviceTask id="Task_NumStart">
   <bpmn:extensionElements>
@@ -97,7 +96,7 @@ verifyRule(__filename, {
     },
     {
       name: 'Input with whitespace and Output with operator',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:serviceTask id="Task_MixedErrors">
   <bpmn:extensionElements>
@@ -122,7 +121,7 @@ verifyRule(__filename, {
     },
     {
       name: 'Multiple elements: Catch Event and Task failures',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:serviceTask id="Task_Error">
   <bpmn:extensionElements>
@@ -154,7 +153,7 @@ verifyRule(__filename, {
     },
     {
       name: 'Script Result with accumulated errors (Issue #11)',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:scriptTask id="Script_Fail">
   <bpmn:extensionElements>
@@ -173,7 +172,7 @@ verifyRule(__filename, {
     },
     {
       name: 'Script Result variable must not contain a period',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:scriptTask id="Script_Dotted">
   <bpmn:extensionElements>
@@ -191,7 +190,7 @@ verifyRule(__filename, {
     },
     {
       name: 'Dotted path with an invalid character or a number after a period',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:serviceTask id="Task_BadPathParts">
   <bpmn:extensionElements>
@@ -216,7 +215,7 @@ verifyRule(__filename, {
     },
     {
       name: 'Dotted path with an empty part',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:serviceTask id="Task_EmptyPathParts">
   <bpmn:extensionElements>

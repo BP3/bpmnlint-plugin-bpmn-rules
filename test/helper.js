@@ -11,14 +11,47 @@
  =================================================================================*/
 
 const RuleTester = require('bpmnlint/lib/testers/rule-tester');
+const { createModdle } = require('bpmnlint/lib/testers/helper');
+const zeebeModdle = require('zeebe-bpmn-moddle/resources/zeebe.json');
 const fs = require('fs');
 const path = require('path');
 const { logger } = require('../logger');
 
+const BOTH_PARSES = Symbol('parseBothWays');
+
+/**
+ * Marks a test case's BPMN to be parsed both without and with the Zeebe moddle descriptor.
+ * Use it in place of createModdle() for rules that read Zeebe extension elements; verifyRule
+ * then runs the test case once for each parse.
+ * @param {string} xml - The BPMN XML
+ */
+function parseBothWays(xml) {
+  return { [BOTH_PARSES]: xml };
+}
+
+/**
+ * Expands each test case created with parseBothWays() into two: one parsed without the Zeebe
+ * moddle descriptor (raw tag names, e.g. 'zeebe:ioMapping') and one parsed with it
+ * (real types, e.g. 'zeebe:IoMapping'). Other test cases are returned unchanged.
+ * @param {object[]} testCases
+ */
+function expandParses(testCases = []) {
+  return testCases.flatMap((testCase) => {
+    const xml = testCase.moddleElement && testCase.moddleElement[BOTH_PARSES];
+    if (xml === undefined) {
+      return [testCase];
+    }
+    return [
+      { ...testCase, name: `${testCase.name} (without Zeebe descriptor)`, moddleElement: createModdle(xml) },
+      { ...testCase, name: `${testCase.name} (with Zeebe descriptor)`, moddleElement: createModdle(xml, { zeebe: zeebeModdle }) },
+    ];
+  });
+}
+
 /*
   Helper function that automatically extracts rule name from the calling test file
   and runs the tests.
- 
+
   @param {string} specFilePath - __filename from the spec file
   @param {object} testCases - { valid: [], invalid: [] }
 */
@@ -34,7 +67,7 @@ function verifyRule(specFilePath, testCases) {
 
   const rule = require(rulePath);
 
-  RuleTester.verify(ruleName, rule, testCases);
+  RuleTester.verify(ruleName, rule, { valid: expandParses(testCases.valid), invalid: expandParses(testCases.invalid) });
 }
 
 /**
@@ -56,4 +89,5 @@ function generateFragment(xmlString, generateProcess = true) {
 module.exports = {
   verifyRule,
   generateFragment,
+  parseBothWays,
 };

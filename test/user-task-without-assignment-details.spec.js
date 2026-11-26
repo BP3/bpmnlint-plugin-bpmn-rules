@@ -10,14 +10,13 @@
  =
  =================================================================================*/
 
-const { createModdle } = require('bpmnlint/lib/testers/helper');
-const { verifyRule, generateFragment } = require('./helper');
+const { verifyRule, generateFragment, parseBothWays } = require('./helper');
 
 verifyRule(__filename, {
   valid: [
     {
       name: 'UserTask with assignee',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:userTask id="Activity_0b74psj" name="Do Something">
   <bpmn:extensionElements>
@@ -29,7 +28,7 @@ verifyRule(__filename, {
     },
     {
       name: 'UserTask with assignee formula',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:userTask id="Activity_0b74psj" name="Do Something">
   <bpmn:extensionElements>
@@ -41,7 +40,7 @@ verifyRule(__filename, {
     },
     {
       name: 'UserTask with candidate groups',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:userTask id="Activity_0b74psj" name="Do Something">
   <bpmn:extensionElements>
@@ -53,7 +52,7 @@ verifyRule(__filename, {
     },
     {
       name: 'UserTask with candidate groups formula',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:userTask id="Activity_0b74psj" name="Do Something">
   <bpmn:extensionElements>
@@ -65,7 +64,7 @@ verifyRule(__filename, {
     },
     {
       name: 'UserTask with candidate users',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:userTask id="Activity_0b74psj" name="Do Something">
   <bpmn:extensionElements>
@@ -77,7 +76,7 @@ verifyRule(__filename, {
     },
     {
       name: 'UserTask with candidate users formula',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:userTask id="Activity_0b74psj" name="Do Something">
   <bpmn:extensionElements>
@@ -89,7 +88,7 @@ verifyRule(__filename, {
     },
     {
       name: 'UserTask with assignee and candidate groups and candidate users',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:userTask id="Activity_0b74psj" name="Do Something">
   <bpmn:extensionElements>
@@ -101,7 +100,7 @@ verifyRule(__filename, {
     },
     {
       name: 'UserTask with assignee and candidate groups and candidate users formulas',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:userTask id="Activity_0b74psj" name="Do Something">
   <bpmn:extensionElements>
@@ -115,7 +114,7 @@ verifyRule(__filename, {
   invalid: [
     {
       name: 'UserTask with empty assignment details',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:userTask id="UserTaskAssignmentEmpty" name="Do Something">
   <bpmn:extensionElements>
@@ -133,7 +132,7 @@ verifyRule(__filename, {
     },
     {
       name: 'UserTask without assignment details',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(`
 <bpmn:userTask id="UserTaskWithoutAssignmentDetails" name="Do Something">
 </bpmn:userTask>
