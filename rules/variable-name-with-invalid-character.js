@@ -10,7 +10,8 @@
  =
  =================================================================================*/
 
-const { is, isAny } = require('bpmnlint-utils');
+const { isAny } = require('bpmnlint-utils');
+const { isZeebe, getIoMappingParameters } = require('./helper');
 
 const APPLICABLE_NODE_TYPES = ['bpmn:Activity', 'bpmn:Event'];
 
@@ -85,15 +86,11 @@ module.exports = function () {
       }
 
       extensionElements.values.forEach((extension) => {
-        if (is(extension, 'zeebe:ioMapping')) {
-          (extension['$children'] || []).forEach((extensionDefinition) => {
-            if (is(extensionDefinition, 'zeebe:input')) {
-              checkVariableName(extensionDefinition.target, node.id, reporter, 'Input', VARIABLE_PATH_CHECKS);
-            } else if (is(extensionDefinition, 'zeebe:output')) {
-              checkVariableName(extensionDefinition.target, node.id, reporter, 'Output', VARIABLE_PATH_CHECKS);
-            }
-          });
-        } else if (is(extension, 'zeebe:script')) {
+        if (isZeebe(extension, 'zeebe:IoMapping')) {
+          const { inputs, outputs } = getIoMappingParameters(extension);
+          inputs.forEach((input) => checkVariableName(input.target, node.id, reporter, 'Input', VARIABLE_PATH_CHECKS));
+          outputs.forEach((output) => checkVariableName(output.target, node.id, reporter, 'Output', VARIABLE_PATH_CHECKS));
+        } else if (isZeebe(extension, 'zeebe:Script')) {
           if (extension.resultVariable) {
             checkVariableName(extension.resultVariable, node.id, reporter, 'Script Result', VARIABLE_NAME_CHECKS);
           }

@@ -10,7 +10,8 @@
  =
  =================================================================================*/
 
-const { isAny, is } = require('bpmnlint-utils');
+const { isAny } = require('bpmnlint-utils');
+const { isZeebe } = require('./helper');
 
 const APPLICABLE_NODE_TYPES = ['bpmn:Process'];
 
@@ -27,7 +28,7 @@ module.exports = function () {
     let versionTagValue;
 
     if (extensionElements && extensionElements.values) {
-      const versionTagElement = extensionElements.values.find((element) => is(element, 'zeebe:versionTag'));
+      const versionTagElement = extensionElements.values.find((element) => isZeebe(element, 'zeebe:VersionTag'));
       versionTagValue = versionTagElement ? versionTagElement.value : undefined;
     }
 

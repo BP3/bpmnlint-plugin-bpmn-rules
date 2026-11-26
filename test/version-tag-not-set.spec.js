@@ -10,14 +10,13 @@
  =
  =================================================================================*/
 
-const { createModdle } = require('bpmnlint/lib/testers/helper');
-const { verifyRule, generateFragment } = require('./helper');
+const { verifyRule, generateFragment, parseBothWays } = require('./helper');
 
 verifyRule(__filename, {
   valid: [
     {
       name: 'Process with a version tag set',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(
           `
 <bpmn:process id="Process_1s1qrpb" name="Review Request Process">
@@ -34,7 +33,7 @@ verifyRule(__filename, {
   invalid: [
     {
       name: 'Process without a version tag element',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(
           `
 <bpmn:process id="Process_1s1qrpb" name="Review Request Process" />
@@ -51,7 +50,7 @@ verifyRule(__filename, {
     },
     {
       name: 'Process with an empty version tag value',
-      moddleElement: createModdle(
+      moddleElement: parseBothWays(
         generateFragment(
           `
 <bpmn:process id="Process_0empty1v" name="Review Request Process">
